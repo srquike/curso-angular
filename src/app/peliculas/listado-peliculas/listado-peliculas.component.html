@@ -1,0 +1,14 @@
+<app-listado-generico [listado]="movies">
+  <ng-container vacio>
+    <div>
+      <p>Mensaje personalizado</p>
+    </div>
+  </ng-container>
+  <ng-container contenido>
+    <div *ngFor="let movie of movies; let i = index" class="movies">
+      <p>Pel&iacute;cula {{ i }}: {{ movie.nombre }}</p>
+      <p>{{ movie.fechaEstreno }}</p>
+      <p>{{ movie.recaudacion }}</p>
+    </div>
+  </ng-container>
+</app-listado-generico>
