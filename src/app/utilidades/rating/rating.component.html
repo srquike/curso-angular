@@ -1,0 +1,9 @@
+<mat-icon
+  *ngFor="let estrella of estrellas; let i = index"
+  [ngClass]="{checked: ratingSeleccionado > i}"
+  (mouseenter)="manejarMouseEnter(i)"
+  (mouseleave)="manejasMouseLeave()"
+  (click)="seleccionar(i)"
+>
+  star
+</mat-icon>
