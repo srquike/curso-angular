@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-crear-actor',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class CrearActorComponent {
 
+  guardar(actor: IActor): void {
+    console.log(actor);
+  }
 }

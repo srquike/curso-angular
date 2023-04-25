@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IMovie } from 'src/interfaces/IMovie';
+import { IPelicula } from 'src/interfaces/IMovie';
 
 @Component({
   selector: 'app-landing-page',
@@ -7,23 +7,27 @@ import { IMovie } from 'src/interfaces/IMovie';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit{
-  peliculasEnCines!: IMovie[];
-  peliculasProximosEstrenos!: IMovie[];
+  peliculasEnCines!: IPelicula[];
+  peliculasProximosEstrenos!: IPelicula[];
 
   ngOnInit(): void {
-      this.peliculasEnCines = [];
-      this.peliculasProximosEstrenos = [];
-      this.peliculasEnCines.push({
+      this.peliculasEnCines = [{ 
         nombre: 'Spider-Man: No Way Home',
+        esEnCines: true,
+        esProximoEstreno: false,
         fechaEstreno: new Date(),
-        recaudacion: 15555.8,
-        poster: 'https://th.bing.com/th/id/OIP.ueqjk4PcBw5QIgAWaxWWLAHaJQ?pid=ImgDet&rs=1'
-      });
-      this.peliculasProximosEstrenos.push({
+        poster: 'https://th.bing.com/th/id/OIP.ibW3TZfXdpRsgQKgKqctzgAAAA?pid=ImgDet&w=360&h=450&rs=1',
+        recaudacion: 1584512.5,
+        generos: []
+      }];
+      this.peliculasProximosEstrenos = [{ 
         nombre: 'Moana',
-        fechaEstreno: new Date('1998-01-27'),
-        recaudacion: 87684.8,
-        poster: 'https://th.bing.com/th/id/OIP.-WVuPPTsUlpnGPD5cp4OuAHaLH?pid=ImgDet&w=1365&h=2048&rs=1'
-      });
+        esEnCines: false,
+        esProximoEstreno: true,
+        fechaEstreno: new Date('2023-05-21'),
+        poster: 'https://th.bing.com/th/id/OIP.ibW3TZfXdpRsgQKgKqctzgAAAA?pid=ImgDet&w=360&h=450&rs=1',
+        recaudacion: 1584512.5,
+        generos: []
+      }];
   }
 }

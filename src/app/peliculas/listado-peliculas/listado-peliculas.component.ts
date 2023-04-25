@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IMovie } from 'src/interfaces/IMovie';
+import { IPelicula } from 'src/interfaces/IMovie';
 
 @Component({
   selector: 'app-listado-peliculas',
@@ -9,7 +9,7 @@ import { IMovie } from 'src/interfaces/IMovie';
 export class ListadoPeliculasComponent implements OnInit {
 
   @Input()
-  movies!: IMovie[];
+  movies!: IPelicula[];
 
   ngOnInit(): void {
 
