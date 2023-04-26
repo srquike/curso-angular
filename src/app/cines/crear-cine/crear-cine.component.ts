@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ICine } from 'src/interfaces/ICine';
 
 @Component({
   selector: 'app-crear-cine',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class CrearCineComponent {
 
+  crearNuevoCine(cine: ICine): void {
+    
+  }
 }

@@ -7,8 +7,9 @@ import { ListadoPeliculasComponent } from './peliculas/listado-peliculas/listado
 import { ListadoGenericoComponent } from './utilidades/listado-generico/listado-generico.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule } from '@angular/forms'
-
 import { MaterialModule } from './material/material.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet'
+
 import { MenuComponent } from './menu/menu.component';
 import { RatingComponent } from './utilidades/rating/rating.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -26,6 +27,9 @@ import { EditarPeliculaComponent } from './peliculas/editar-pelicula/editar-peli
 import { FormularioGeneroComponent } from './generos/formulario-genero/formulario-genero.component';
 import { BuscarPeliculasComponent } from './peliculas/buscar-peliculas/buscar-peliculas.component';
 import { FormularioActorComponent } from './actores/formulario-actor/formulario-actor.component';
+import { SubirImagenComponent } from './utilidades/subir-imagen/subir-imagen.component';
+import { FormularioCineComponent } from './cines/formulario-cine/formulario-cine.component';
+import { MapaComponent } from './utilidades/mapa/mapa.component';
 
 @NgModule({
   declarations: [
@@ -49,13 +53,17 @@ import { FormularioActorComponent } from './actores/formulario-actor/formulario-
     FormularioGeneroComponent,
     BuscarPeliculasComponent,
     FormularioActorComponent,
+    SubirImagenComponent,
+    FormularioCineComponent,
+    MapaComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LeafletModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IActor } from 'src/interfaces/IActor';
+import { ICrearActor, IEditarActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-formulario-actor',
@@ -12,13 +12,13 @@ export class FormularioActorComponent implements OnInit {
   protected formulario: FormGroup;
 
   @Input()
-  modelo: IActor;
+  modelo: IEditarActor;
 
   @Output()
-  protected submitActor: EventEmitter<IActor>;
+  protected submitActor: EventEmitter<ICrearActor>;
 
   constructor(private formBuilder: FormBuilder) {
-    this.submitActor = new EventEmitter<IActor>();
+    this.submitActor = new EventEmitter<ICrearActor>();
   }
 
   ngOnInit(): void {
@@ -26,7 +26,8 @@ export class FormularioActorComponent implements OnInit {
       nombre: ['', {
         validators: [ Validators.required ]
       }],
-      fechaNacimiento: ''
+      fechaNacimiento: '',
+      foto: ''
     });
 
     if (this.modelo !== undefined) {
@@ -36,5 +37,9 @@ export class FormularioActorComponent implements OnInit {
 
   onSubmit(): void {
     this.submitActor.emit(this.formulario.value);
+  }
+
+  imagenSeleccionada(archivo: File): void {
+    this.formulario.get('foto').setValue(archivo);
   }
 }
