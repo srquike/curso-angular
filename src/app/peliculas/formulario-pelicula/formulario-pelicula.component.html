@@ -1,0 +1,44 @@
+<form [formGroup]="_formulario" (submit)="guardarCambios()">
+
+  <mat-form-field appearance="outline">
+    <mat-label>T&iacute;tulo</mat-label>
+    <input formControlName="nombre" matInput />
+    <mat-error>El campo t&iacute;tulo es requerido</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Trailer</mat-label>
+    <input formControlName="trailer" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+      <mat-label>Fecha de estreno</mat-label>
+      <input formControlName="fechaEstreno" matInput [matDatepicker]="picker" />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-checkbox formControlName="esEnCines">En cines</mat-checkbox>
+
+  <h4>Seleccione los g&eacute;neros de la pel&iacute;cula</h4>
+  <app-selector-multiple 
+  [elementosNoSeleccionados]="_generosNoSeleccionados"
+  [elementosSeleccionados]="_generosSeleccionados"></app-selector-multiple>
+  
+  <h4>Seleccione los c&iacute;nes de la pel&iacute;cula</h4>
+  <app-selector-multiple 
+  [elementosNoSeleccionados]="_cinesNoSeleccionados"
+  [elementosSeleccionados]="_cinesSeleccionados"></app-selector-multiple>
+
+  <h4>Seleccionar poster de la pel&iacute;cula</h4>
+  <app-subir-imagen></app-subir-imagen>
+
+  <h4>Seleccionar actores de la pel&iacute;cula</h4>
+  <app-busqueda-autocompletar></app-busqueda-autocompletar>
+
+  <div>
+      <button mat-flat-button color="primary" [disabled]="_formulario.invalid">Guardar</button>
+      <a mat-stroked-button routerLink="/">Cancelar</a>
+  </div>
+
+</form>

@@ -23,11 +23,27 @@ export class MapaComponent implements OnInit {
 
   public constructor() {
     this.submitCoordenada = new EventEmitter<ICoordenada>();
+    this.capaMarcadores = [];
   }
 
   ngOnInit(): void {
+    if (this.modelo !== undefined) {
+      this.colocarMarcador(this.modelo);
+    }
+  }
+
+  private colocarMarcador(coordenadas: ICoordenada) {
+    this.capaMarcadores = [];
     this.capaMarcadores.push(
-      marker([13.699202512494862, -89.19183969497682])
+      marker([coordenadas.latitud, coordenadas.longitud], {
+        icon: icon({
+          iconSize: [25, 41],
+          iconAnchor: [13, 41],
+          iconUrl: 'marker-icon.png',
+          iconRetinaUrl: 'marker-icon-2x.png',
+          shadowUrl: 'assets/marker-shadow.png',
+        }),
+      })
     );
   }
 
@@ -45,24 +61,12 @@ export class MapaComponent implements OnInit {
   protected capaMarcadores: Marker<any>[];
 
   marcarUbicacion(event: LeafletMouseEvent) {
-    let coordenada: ICoordenada = {
+    let coordenadas: ICoordenada = {
       latitud: event.latlng.lat,
       longitud: event.latlng.lng,
     };
-
-    this.capaMarcadores = [];
-    this.capaMarcadores.push(
-      marker([coordenada.latitud, coordenada.longitud], {
-        icon: icon({
-          iconSize: [25, 41],
-          iconAnchor: [13, 41],
-          iconUrl: 'marker-icon.png',
-          iconRetinaUrl: 'marker-icon-2x.png',
-          shadowUrl: 'assets/marker-shadow.png',
-        }),
-      })
-    );
-    this.submitCoordenada.emit(coordenada);
-    window.prompt('', `${coordenada.latitud}, ${coordenada.longitud}`);
+    this.colocarMarcador(coordenadas);
+    this.submitCoordenada.emit(coordenadas);
+    window.prompt('', `${coordenadas.latitud}, ${coordenadas.longitud}`);
   }
 }

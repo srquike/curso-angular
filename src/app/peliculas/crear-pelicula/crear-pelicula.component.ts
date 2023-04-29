@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { IPelicula } from 'src/interfaces/IPelicula';
 
 @Component({
   selector: 'app-crear-pelicula',
@@ -7,4 +8,7 @@ import { Component } from '@angular/core';
 })
 export class CrearPeliculaComponent {
 
+  crearPelicula(pelicula: IPelicula): void {
+    console.log(pelicula);
+  }
 }

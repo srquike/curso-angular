@@ -1,5 +1,3 @@
-import { IGenero } from "./IGenero";
-
 export interface IPelicula {
   nombre: string;
   fechaEstreno: Date;
@@ -8,4 +6,8 @@ export interface IPelicula {
   esEnCines: boolean;
   esProximoEstreno: boolean;
   generos: number[];
+}
+
+export interface ICrearPelicula {
+  
 }

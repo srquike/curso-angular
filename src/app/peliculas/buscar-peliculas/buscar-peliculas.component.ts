@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { IGenero } from 'src/interfaces/IGenero';
-import { IPelicula } from 'src/interfaces/IMovie';
+import { IPelicula } from 'src/interfaces/IPelicula';
 
 @Component({
   selector: 'app-buscar-peliculas',

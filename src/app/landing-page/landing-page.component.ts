@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IPelicula } from 'src/interfaces/IMovie';
+import { IPelicula } from 'src/interfaces/IPelicula';
 
 @Component({
   selector: 'app-landing-page',

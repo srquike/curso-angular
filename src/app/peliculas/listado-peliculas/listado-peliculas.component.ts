@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { IPelicula } from 'src/interfaces/IMovie';
+import { IPelicula } from 'src/interfaces/IPelicula';
 
 @Component({
   selector: 'app-listado-peliculas',
@@ -9,13 +9,13 @@ import { IPelicula } from 'src/interfaces/IMovie';
 export class ListadoPeliculasComponent implements OnInit {
 
   @Input()
-  movies!: IPelicula[];
+  peliculas!: IPelicula[];
 
   ngOnInit(): void {
 
   }
 
   eliminarPelicula(indice:number):void {
-    this.movies.splice(indice, 1);
+    this.peliculas.splice(indice, 1);
   }
 }

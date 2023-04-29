@@ -1,9 +1,11 @@
 <form [formGroup]="formulario" (submit)="onSubmit()">
+
   <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
     <input formControlName="nombre" matInput />
     <mat-error>El campo nombre es requerido</mat-error>
   </mat-form-field>
+  
   <mat-form-field appearance="outline">
       <mat-label>Fecha de nacimiento</mat-label>
       <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker"/>

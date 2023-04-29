@@ -1,6 +1,6 @@
 <form (submit)="guardar()" [formGroup]="form">
       <mat-form-field appearance="outline">
-            <mat-label>Nombre*</mat-label>
+            <mat-label>Nombre</mat-label>
             <input formControlName="nombre" matInput />
             <mat-error *ngIf="form.invalid">{{obtenerMensajeError()}}</mat-error>
       </mat-form-field>

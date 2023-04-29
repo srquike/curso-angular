@@ -8,8 +8,6 @@ import { ICrearActor } from 'src/interfaces/IActor';
 })
 export class CrearActorComponent {
 
-  protected modelo: ICrearActor;
-
   guardar(actor: ICrearActor): void {
     console.log(actor);
   }

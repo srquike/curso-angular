@@ -2,14 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material/material.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent } from './app.component';
 import { ListadoPeliculasComponent } from './peliculas/listado-peliculas/listado-peliculas.component';
 import { ListadoGenericoComponent } from './utilidades/listado-generico/listado-generico.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ReactiveFormsModule } from '@angular/forms'
-import { MaterialModule } from './material/material.module';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet'
-
 import { MenuComponent } from './menu/menu.component';
 import { RatingComponent } from './utilidades/rating/rating.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -30,6 +31,9 @@ import { FormularioActorComponent } from './actores/formulario-actor/formulario-
 import { SubirImagenComponent } from './utilidades/subir-imagen/subir-imagen.component';
 import { FormularioCineComponent } from './cines/formulario-cine/formulario-cine.component';
 import { MapaComponent } from './utilidades/mapa/mapa.component';
+import { FormularioPeliculaComponent } from './peliculas/formulario-pelicula/formulario-pelicula.component';
+import { SelectorMultipleComponent } from './utilidades/selector-multiple/selector-multiple.component';
+import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocompletar/busqueda-autocompletar.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,9 @@ import { MapaComponent } from './utilidades/mapa/mapa.component';
     SubirImagenComponent,
     FormularioCineComponent,
     MapaComponent,
+    FormularioPeliculaComponent,
+    SelectorMultipleComponent,
+    BusquedaAutocompletarComponent,
   ],
   imports: [
     BrowserModule,
@@ -63,7 +70,8 @@ import { MapaComponent } from './utilidades/mapa/mapa.component';
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    LeafletModule
+    LeafletModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent],

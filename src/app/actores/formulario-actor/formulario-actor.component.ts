@@ -19,9 +19,6 @@ export class FormularioActorComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder) {
     this.submitActor = new EventEmitter<ICrearActor>();
-  }
-
-  ngOnInit(): void {
     this.formulario = this.formBuilder.group({
       nombre: ['', {
         validators: [ Validators.required ]
@@ -29,7 +26,9 @@ export class FormularioActorComponent implements OnInit {
       fechaNacimiento: '',
       foto: ''
     });
+  }
 
+  ngOnInit(): void {
     if (this.modelo !== undefined) {
       this.formulario.patchValue(this.modelo);
     }
