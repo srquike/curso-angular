@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IPelicula } from 'src/interfaces/IPelicula';
+import { PeliculasService } from '../peliculas.service';
 
 @Component({
   selector: 'app-listado-peliculas',
@@ -7,15 +8,23 @@ import { IPelicula } from 'src/interfaces/IPelicula';
   styleUrls: ['./listado-peliculas.component.css'],
 })
 export class ListadoPeliculasComponent implements OnInit {
-
   @Input()
   peliculas!: IPelicula[];
 
-  ngOnInit(): void {
+  private _service: PeliculasService;
 
+  public constructor(service: PeliculasService) {
+    this._service = service;
   }
 
-  eliminarPelicula(indice:number):void {
+  ngOnInit(): void {
+    this._service.obtenerPeliculas().subscribe({
+      next: (result) => (this.peliculas = result),
+      error: (error) => console.log(error),
+    });
+  }
+
+  eliminarPelicula(indice: number): void {
     this.peliculas.splice(indice, 1);
   }
 }
