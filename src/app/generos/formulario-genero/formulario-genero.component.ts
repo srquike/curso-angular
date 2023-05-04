@@ -19,11 +19,9 @@ export class FormularioGeneroComponent implements OnInit {
   onSubmit: EventEmitter<IGenero>;
 
   constructor(private formBuilder: FormBuilder) {
-    this.modelo = { id: 0, nombre: '' };
-
     this.onSubmit = new EventEmitter<IGenero>();
     this.form = this.formBuilder.group({
-      nombre: [
+      name: [
         '',
         {
           validators: [

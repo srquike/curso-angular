@@ -1,13 +1,17 @@
-export interface IPelicula {
-  nombre: string;
-  fechaEstreno: Date;
-  recaudacion: number;
-  poster: string;
-  esEnCines: boolean;
-  esProximoEstreno: boolean;
-  generos: number[];
+interface IPeliculaBase {
+  title: string;
+  releaseDate: string;
+  trailerUrl: string;
+  mpaaRating: string;
+  genres: number[];
+  cast: number[];
+  cinemas: number[];
 }
 
-export interface ICrearPelicula {
-  
+export interface IPelicula extends IPeliculaBase {
+  poster: string;
+}
+
+export interface IFormularioPelicula extends IPeliculaBase{
+  poster: File;
 }

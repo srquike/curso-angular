@@ -12,12 +12,12 @@ export class SubirImagenComponent {
   public urlImagenActual: string;
 
   @Output()
-  protected archivoImagenSeleccionada: EventEmitter<File>;
+  protected onSelectImage: EventEmitter<File>;
   
   protected imagenBase64: string | ArrayBuffer;
 
   public constructor() {
-    this.archivoImagenSeleccionada = new EventEmitter<File>();
+    this.onSelectImage = new EventEmitter<File>();
   }
 
   protected async onChange(inputFileEvent: Event): Promise<void> {
@@ -27,7 +27,7 @@ export class SubirImagenComponent {
     if (inputFileElement.files.length > 0) {
       const file: File = inputFileElement.files[0];
       this.imagenBase64 = await aBase64(file);
-      this.archivoImagenSeleccionada.emit(file);
+      this.onSelectImage.emit(file);
       this.urlImagenActual = null;
     }
   }

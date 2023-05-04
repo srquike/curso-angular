@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IGenero } from 'src/interfaces/IGenero';
+import { GenerosService } from '../generos.service';
 
 @Component({
   selector: 'app-crear-genero',
@@ -8,10 +9,21 @@ import { IGenero } from 'src/interfaces/IGenero';
   styleUrls: ['./crear-genero.component.css'],
 })
 export class CrearGeneroComponent {
-  constructor(private router: Router) {}
+  private _service: GenerosService;
+  private _router: Router;
+
+  constructor(router: Router, service: GenerosService) {
+    this._router = router;
+    this._service = service;
+  }
 
   guardar(genero: IGenero): void {
-    console.log(genero);
-    this.router.navigate(['/generos']);
+    this._service.crearGenero(genero).subscribe({
+      next: (resultado) => {
+        console.log(resultado);
+        this._router.navigate(['/generos']);
+      },
+      error: (error) => console.log(error),
+    });
   }
 }

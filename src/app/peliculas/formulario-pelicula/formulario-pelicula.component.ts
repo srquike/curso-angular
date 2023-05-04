@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IEditarActor } from 'src/interfaces/IActor';
 import { IElementoSelectorMultiple } from 'src/interfaces/IElementoSelectorMultiple';
-import { IPelicula } from 'src/interfaces/IPelicula';
+import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
 
 @Component({
   selector: 'app-formulario-pelicula',
@@ -13,7 +14,7 @@ export class FormularioPeliculaComponent implements OnInit {
   public modelo: IPelicula;
 
   @Output()
-  protected _onSubmitPelicula: EventEmitter<IPelicula>;
+  protected _onSubmitPelicula: EventEmitter<IFormularioPelicula>;
 
   protected _formulario: FormGroup;
 
@@ -25,30 +26,29 @@ export class FormularioPeliculaComponent implements OnInit {
 
   protected _cinesNoSeleccionados: IElementoSelectorMultiple[] = [
     { llave: 1, valor: 'Cinépolis' },
-    { llave: 2, valor: 'Cinemark' }
+    { llave: 2, valor: 'Cinemark' },
   ];
 
   protected _generosSeleccionados: IElementoSelectorMultiple[] = [];
   protected _cinesSeleccionados: IElementoSelectorMultiple[] = [];
+  protected _actoresSeleccionados: IEditarActor[] = [];
 
   public constructor(formBuilder: FormBuilder) {
-    this._onSubmitPelicula = new EventEmitter<IPelicula>();
+    this._onSubmitPelicula = new EventEmitter<IFormularioPelicula>();
     this._formulario = formBuilder.group({
-      nombre: [
+      title: [
         '',
         {
           validators: [Validators.required],
         },
       ],
-      resumen: '',
-      esEnCines: false,
-      esProximoEstreno: false,
-      trailer: '',
-      generos: [],
-      cines: [],
-      recaudacion: '',
-      fechaEstreno: '',
+      releaseDate: '',
+      trailerUrl: '',
+      mpaaRating: '',
       poster: '',
+      genres: [],
+      cinemas: [],
+      cast: [],
     });
   }
 
@@ -60,11 +60,18 @@ export class FormularioPeliculaComponent implements OnInit {
 
   guardarCambios(): void {
     const generos = this._generosSeleccionados.map((genero) => genero.llave);
-    this._formulario.get('generos').setValue(generos);
-    
+    this._formulario.get('genres').setValue(generos);
+
     const cines = this._cinesSeleccionados.map((cine) => cine.llave);
-    this._formulario.get('cines').setValue(cines);
+    this._formulario.get('cinemas').setValue(cines);
+
+    const actores = this._actoresSeleccionados.map((actor) => actor.id);
+    this._formulario.get('cast').setValue(actores);
 
     this._onSubmitPelicula.emit(this._formulario.value);
+  }
+
+  setSelectedImage(image: File): void {
+    this._formulario.get('poster').setValue(image);
   }
 }

@@ -8,6 +8,7 @@ import { MaterialModule } from './material/material.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
 import { ListadoPeliculasComponent } from './peliculas/listado-peliculas/listado-peliculas.component';
@@ -74,6 +75,7 @@ import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocomple
     LeafletModule,
     FormsModule,
     HttpClientModule,
+    SweetAlert2Module,
   ],
   providers: [],
   bootstrap: [AppComponent],

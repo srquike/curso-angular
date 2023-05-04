@@ -1,5 +1,5 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTable } from '@angular/material/table';
@@ -14,8 +14,12 @@ export class BusquedaAutocompletarComponent implements OnInit {
   protected _control: FormControl;
   protected _actores: IEditarActor[];
   protected _actoresDefecto: IEditarActor[];
-  protected _actoresSeleccionados: IEditarActor[];
+
+  @Input()
+  public _actoresSeleccionados: IEditarActor[];
   protected _columnas: string[];
+
+
 
   @ViewChild(MatTable)
   protected _table: MatTable<any>;
