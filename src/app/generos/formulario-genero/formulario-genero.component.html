@@ -1,11 +1,13 @@
 <form (submit)="guardar()" [formGroup]="form">
-      <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input formControlName="name" matInput />
-            <mat-error *ngIf="form.invalid">{{obtenerMensajeError()}}</mat-error>
-      </mat-form-field>
-      <div>
-            <button mat-flat-button color="primary" [disabled]="form.invalid">Guardar</button>
-            <a mat-stroked-button routerLink="/generos">Cancelar</a>
-      </div>
+  <mat-form-field appearance="outline">
+    <mat-label>Nombre</mat-label>
+    <input formControlName="name" matInput />
+    <mat-error *ngIf="form.invalid">{{ obtenerMensajeError() }}</mat-error>
+  </mat-form-field>
+  <div>
+    <button mat-flat-button color="primary" [disabled]="form.invalid">
+      Guardar
+    </button>
+    <a mat-stroked-button routerLink="/generos">Cancelar</a>
+  </div>
 </form>

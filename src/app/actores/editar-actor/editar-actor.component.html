@@ -1,2 +1,5 @@
 <h2>Editar actor</h2>
-<app-formulario-actor (submitActor)="guardar($event)" [modelo]="modelo"></app-formulario-actor>
+
+<app-form-star *ngIf="_star" [_star]="_star" (_onEmit)="editStar($event)"></app-form-star>
+
+<mat-spinner *ngIf="!_star"></mat-spinner>

@@ -1,17 +1,20 @@
-<ng-container *ngIf="!listado">
-  <span #nulo>
-    <ng-container select="[nulo]"></ng-container>
-  </span>
-  <span *ngIf="!nulo.innerHTML.trim()">
-    <p>Cargando listado, por favor espere.</p>
-  </span>
-</ng-container>
+<div style="margin-top: 1rem;">
+  <ng-container *ngIf="!listado">
+    <span #nulo>
+      <ng-container select="[nulo]"></ng-container>
+    </span>
+    <span *ngIf="nulo.innerHTML.trim()">
+      <p>Cargando listado, por favor espere.</p>
+      <mat-spinner></mat-spinner>
+    </span>
+  </ng-container>
+</div>
 
 <ng-container *ngIf="listado?.length === 0">
   <span #vacio>
     <ng-content select="[vacio]"></ng-content>
   </span>
-  <span *ngIf="!vacio.innerHTML.trim()">
+  <span *ngIf="vacio.innerHTML.trim()">
     <p>No hay elementos para mostrar.</p>
   </span>
 </ng-container>

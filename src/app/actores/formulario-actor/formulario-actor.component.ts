@@ -1,44 +1,49 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ICrearActor, IEditarActor } from 'src/interfaces/IActor';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { IActorFormulario, IActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-formulario-actor',
   templateUrl: './formulario-actor.component.html',
-  styleUrls: ['./formulario-actor.component.css']
+  styleUrls: ['./formulario-actor.component.css'],
 })
 export class FormularioActorComponent implements OnInit {
-
-  protected formulario: FormGroup;
+  protected _form: FormGroup;
+  private _formBuilder: FormBuilder;
 
   @Input()
-  modelo: IEditarActor;
+  modelo: IActor;
 
   @Output()
-  protected submitActor: EventEmitter<ICrearActor>;
+  protected submitActor: EventEmitter<IActorFormulario>;
 
-  constructor(private formBuilder: FormBuilder) {
-    this.submitActor = new EventEmitter<ICrearActor>();
-    this.formulario = this.formBuilder.group({
-      nombre: ['', {
-        validators: [ Validators.required ]
-      }],
-      fechaNacimiento: '',
-      foto: ''
-    });
+  constructor(formBuilder: FormBuilder) {
+    this.submitActor = new EventEmitter<IActorFormulario>();
+    this._formBuilder = formBuilder;
   }
 
   ngOnInit(): void {
+    this._form = new FormGroup({
+      name: new FormControl(''),
+      dateOfBirth: new FormControl(''),
+      photographyFile: new FormControl(''),
+    });
+
     if (this.modelo !== undefined) {
-      this.formulario.patchValue(this.modelo);
+      this._form.patchValue(this.modelo);
     }
   }
 
   onSubmit(): void {
-    this.submitActor.emit(this.formulario.value);
+    this.submitActor.emit(this._form.value);
   }
 
   imagenSeleccionada(archivo: File): void {
-    this.formulario.get('foto').setValue(archivo);
+    this._form.get('photographyFile').setValue(archivo);
   }
 }

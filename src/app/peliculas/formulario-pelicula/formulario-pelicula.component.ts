@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IEditarActor } from 'src/interfaces/IActor';
+import { IActor } from 'src/interfaces/IActor';
 import { IElementoSelectorMultiple } from 'src/interfaces/IElementoSelectorMultiple';
 import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
 
@@ -31,7 +31,7 @@ export class FormularioPeliculaComponent implements OnInit {
 
   protected _generosSeleccionados: IElementoSelectorMultiple[] = [];
   protected _cinesSeleccionados: IElementoSelectorMultiple[] = [];
-  protected _actoresSeleccionados: IEditarActor[] = [];
+  protected _actoresSeleccionados: IActor[] = [];
 
   public constructor(formBuilder: FormBuilder) {
     this._onSubmitPelicula = new EventEmitter<IFormularioPelicula>();

@@ -1,7 +1,6 @@
-import { ICoordenada } from "./ICoordenada";
-
 export interface ICine {
   id: number;
-  nombre: string;
-  coordenada: ICoordenada;
+  name: string;
+  longitude: number;
+  latitude: number;
 }

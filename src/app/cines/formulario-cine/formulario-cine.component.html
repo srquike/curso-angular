@@ -1,15 +1,15 @@
-<form (submit)="onSubmitCine()" [formGroup]="_formulario">
+<form (submit)="onSubmitCine()" [formGroup]="_form">
   <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
-    <input formControlName="nombre" matInput />
-    <mat-error *ngIf="_formulario.invalid">El campo es requerido.</mat-error>
+    <input formControlName="name" matInput />
+    <mat-error *ngIf="_form.invalid">El campo es requerido.</mat-error>
   </mat-form-field>
 
   <h4>Seleccione la ubicaci&oacute;n del cine</h4>
-  <app-mapa (submitCoordenada)="obtenerCoordenadas($event)" [modelo]="modelo.coordenada"></app-mapa>
+  <app-mapa (submitCoordenada)="obtenerCoordenadas($event)" [coordinate]="_coordinates"></app-mapa>
 
   <div>
-      <button mat-flat-button color="primary" [disabled]="_formulario.invalid">Guardar</button>
+      <button mat-flat-button color="primary" [disabled]="_form.invalid">Guardar</button>
       <a mat-stroked-button routerLink="/cines">Cancelar</a>
   </div>
 </form>

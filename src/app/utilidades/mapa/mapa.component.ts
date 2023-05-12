@@ -16,7 +16,7 @@ import { ICoordenada } from 'src/interfaces/ICoordenada';
 })
 export class MapaComponent implements OnInit {
   @Input()
-  public modelo: ICoordenada;
+  public coordinate: ICoordenada;
 
   @Output()
   protected submitCoordenada: EventEmitter<ICoordenada>;
@@ -27,15 +27,15 @@ export class MapaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (this.modelo !== undefined) {
-      this.colocarMarcador(this.modelo);
+    if (this.coordinate !== undefined) {
+      this.colocarMarcador(this.coordinate);
     }
   }
 
   private colocarMarcador(coordenadas: ICoordenada) {
     this.capaMarcadores = [];
     this.capaMarcadores.push(
-      marker([coordenadas.latitud, coordenadas.longitud], {
+      marker([coordenadas.latitude, coordenadas.longitude], {
         icon: icon({
           iconSize: [25, 41],
           iconAnchor: [13, 41],
@@ -62,11 +62,10 @@ export class MapaComponent implements OnInit {
 
   marcarUbicacion(event: LeafletMouseEvent) {
     let coordenadas: ICoordenada = {
-      latitud: event.latlng.lat,
-      longitud: event.latlng.lng,
+      latitude: event.latlng.lat,
+      longitude: event.latlng.lng,
     };
     this.colocarMarcador(coordenadas);
     this.submitCoordenada.emit(coordenadas);
-    window.prompt('', `${coordenadas.latitud}, ${coordenadas.longitud}`);
   }
 }

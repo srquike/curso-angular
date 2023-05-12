@@ -36,6 +36,9 @@ import { MapaComponent } from './utilidades/mapa/mapa.component';
 import { FormularioPeliculaComponent } from './peliculas/formulario-pelicula/formulario-pelicula.component';
 import { SelectorMultipleComponent } from './utilidades/selector-multiple/selector-multiple.component';
 import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocompletar/busqueda-autocompletar.component';
+import { CreateStarComponent } from './stars/create-star/create-star.component';
+import { FormStarComponent } from './stars/form-star/form-star.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -65,6 +68,8 @@ import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocomple
     FormularioPeliculaComponent,
     SelectorMultipleComponent,
     BusquedaAutocompletarComponent,
+    CreateStarComponent,
+    FormStarComponent,
   ],
   imports: [
     BrowserModule,
@@ -77,7 +82,9 @@ import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocomple
     HttpClientModule,
     SweetAlert2Module,
   ],
-  providers: [],
+  providers: [{
+    provide: MAT_DATE_LOCALE, useValue: 'es-SV'
+  }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

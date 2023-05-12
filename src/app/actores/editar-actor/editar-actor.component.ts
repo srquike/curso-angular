@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ICrearActor, IEditarActor } from 'src/interfaces/IActor';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IActorFormulario, IActor } from 'src/interfaces/IActor';
+import { ActoresService } from '../actores.service';
 
 @Component({
   selector: 'app-editar-actor',
@@ -8,24 +9,42 @@ import { ICrearActor, IEditarActor } from 'src/interfaces/IActor';
   styleUrls: ['./editar-actor.component.css'],
 })
 export class EditarActorComponent implements OnInit {
-  protected modelo: IEditarActor;
+  private _activateRoute: ActivatedRoute;
+  private _service: ActoresService;
+  private _router: Router;
 
-  constructor(private activateRoute: ActivatedRoute) {
-    this.modelo = {
-      id: 1,
-      nombre: 'Jonathan Vanegas',
-      fechaNacimiento: new Date('1998-01-27'),
-      foto: 'https://m.media-amazon.com/images/M/MV5BMTU0MTQ4OTMyMV5BMl5BanBnXkFtZTcwMTQxOTY1NA@@._V1_FMjpg_UX1000_.jpg'
-    };
+  protected _starId: number;
+  protected _star: IActor;
+
+  constructor(
+    activateRoute: ActivatedRoute,
+    service: ActoresService,
+    router: Router
+  ) {
+    this._activateRoute = activateRoute;
+    this._service = service;
+    this._router = router;
   }
 
   ngOnInit(): void {
-    this.activateRoute.params.subscribe((params) => {
-      console.log(params['id']);
+    this._activateRoute.params.subscribe((p) => {
+      this._starId = parseInt(p['id']);
+      this._service.getStarById(this._starId).subscribe({
+        next: (response) => {
+          response.dateOfBirth = new Date(response.dateOfBirth);
+          this._star = response;
+        },
+        error: (error) => console.log(error),
+      });
     });
   }
 
-  guardar(actor: ICrearActor): void {
-    console.log(actor);
+  editStar(star: IActorFormulario): void {
+    this._service.editStar(star, this._starId).subscribe({
+      next: () => {
+        this._router.navigate(['/actores']);
+      },
+      error: (error) => console.log(error),
+    });
   }
 }

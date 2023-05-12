@@ -1,2 +1,59 @@
 <h2>Listado de cines</h2>
 <button mat-flat-button color="primary" routerLink="/cines/crear">Crear nuevo</button>
+
+<app-listado-generico [listado]="_cinemas">
+      <ng-container nulo>
+        <p>Cargando listado de g&eacute;neros, por favor espere.</p>
+      </ng-container>
+      <ng-container vacio>
+        <p>No hay g&eacute;neros para mostrar.</p>
+      </ng-container>
+      <ng-container contenido>
+        <table
+          #table
+          mat-table
+          [dataSource]="_cinemas"
+          class="mat-elevation-z8 index-table"
+        >
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let cinema">{{ cinema.id }}</td>
+          </ng-container>
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Nombre</th>
+            <td mat-cell *matCellDef="let cinema">{{ cinema.name }}</td>
+          </ng-container>
+          <ng-container matColumnDef="options">
+            <th mat-header-cell *matHeaderCellDef>Acciones</th>
+            <td mat-cell *matCellDef="let cinema">
+              <a
+                mat-flat-button
+                color="primary"
+                routerLink="/cines/editar/{{ cinema.id }}"
+                >Editar</a
+              >
+              <button
+                mat-flat-button
+                color="warn"
+                (click)="deleteCinema(cinema.id, cinema.name)"
+              >
+                Eliminar
+              </button>
+            </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef="_columns"></tr>
+          <tr mat-row *matRowDef="let row; columns: _columns"></tr>
+        </table>
+    
+        <mat-paginator
+          [pageSizeOptions]="[5, 10, 20, 50]"
+          showFirstLastButtons
+          [length]="_length"
+          [pageSize]="_pageSize"
+          (page)="pageCinemas($event)"
+          class="mat-elevation-z8"
+          MatPaginator
+        >
+        </mat-paginator>
+      </ng-container>
+    </app-listado-generico>

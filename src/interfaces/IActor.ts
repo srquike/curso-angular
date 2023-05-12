@@ -1,14 +1,14 @@
-export interface ICrearActor extends IActor {  
-  foto: File;
+export interface IActorFormulario extends IActorBase {  
+  photographyFile: File;
 }
 
-interface IActor {
+interface IActorBase {
   id: number;
-  nombre: string;
-  fechaNacimiento: Date;
-  personaje?: string;
+  name: string;
+  dateOfBirth: Date | string;
 }
 
-export interface IEditarActor extends IActor {
-  foto: string;
+export interface IActor extends IActorBase {
+  photographyURL: string;
 }
+

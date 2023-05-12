@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { IActorFormulario } from 'src/interfaces/IActor';
-import { ActoresService } from '../actores.service';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ActoresService } from 'src/app/actores/actores.service';
+import { IActorFormulario } from 'src/interfaces/IActor';
 
 @Component({
-  selector: 'app-crear-actor',
-  templateUrl: './crear-actor.component.html',
-  styleUrls: ['./crear-actor.component.css'],
+  selector: 'app-create-star',
+  templateUrl: './create-star.component.html',
+  styleUrls: ['./create-star.component.css'],
 })
-export class CrearActorComponent {
+export class CreateStarComponent {
   private _service: ActoresService;
   private _router: Router;
 
@@ -17,7 +18,7 @@ export class CrearActorComponent {
     this._router = router;
   }
 
-  createStar(star: IActorFormulario): void {
+  protected createStar(star: IActorFormulario): void {
     this._service.createStar(star).subscribe({
       next: (createdStarId) => {
         console.log(createdStarId);

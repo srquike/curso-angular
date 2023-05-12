@@ -12,8 +12,8 @@ export class EditarGeneroComponent implements OnInit {
   protected _modelo: IGenero;
 
   private _service: GenerosService;
-  private _router: Router;
   private _activatedRoute: ActivatedRoute;
+  private _router: Router;
   private _genreId: number;
 
   constructor(

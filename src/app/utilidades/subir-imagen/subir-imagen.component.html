@@ -1,8 +1,17 @@
 <div>
-  <button mat-raised-button (click)="fileInput.click()">
-    Seleccionar un archivo
+  <button type="button" mat-raised-button (click)="fileInput.click()">
+    <span #buttonText>
+      <ng-content select="[buttonText]"></ng-content>
+    </span>
+    <span *ngIf="!buttonText.innerHTML.trim()">Seleccionar un archivo</span>
   </button>
-  <input type="file" (change)="onChange($event)" hidden #fileInput />
+  <input
+    type="file"
+    accept="image/*"
+    (change)="onChange($event)"
+    hidden
+    #fileInput
+  />
 </div>
 <div>
   <div *ngIf="imagenBase64">

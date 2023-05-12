@@ -1,25 +1,26 @@
-<form [formGroup]="formulario" (submit)="onSubmit()">
-
+<form (submit)="onSubmit()" [formGroup]="_form">
   <mat-form-field appearance="outline">
     <mat-label>Nombre</mat-label>
-    <input formControlName="nombre" matInput />
+    <input formControlName="name" matInput />
     <mat-error>El campo nombre es requerido</mat-error>
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline">
-      <mat-label>Fecha de nacimiento</mat-label>
-      <input formControlName="fechaNacimiento" matInput [matDatepicker]="picker"/>
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+    <mat-label>Fecha de nacimiento</mat-label>
+    <input formControlName="dateOfBirth" [matDatepicker]="picker" matInput />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
-  <app-subir-imagen 
-  (onSelectImage)="imagenSeleccionada($event)"
-  [urlImagenActual]="modelo.foto"
+  <app-subir-imagen
+    (onSelectImage)="imagenSeleccionada($event)"
+    [urlImagenActual]="modelo.photographyURL"
   ></app-subir-imagen>
 
   <div>
-      <button mat-flat-button color="primary" [disabled]="formulario.invalid">Guardar</button>
-      <a mat-stroked-button routerLink="/actores">Cancelar</a>
+    <button mat-flat-button color="primary" [disabled]="_form.invalid">
+      Guardar
+    </button>
+    <a mat-stroked-button routerLink="/actores">Cancelar</a>
   </div>
 </form>

@@ -10,7 +10,7 @@
   </mat-form-field>
   <mat-autocomplete hideSingleSelectionIndicator="true" #auto (optionSelected)="onOptionSelected($event)">
     <mat-option *ngFor="let actor of _actores" [value]="actor">
-      <img [src]="actor.foto" alt="" /> {{ actor.nombre }}
+      <img [src]="actor.photographyURL" alt="" /> {{ actor.name }}
     </mat-option>
   </mat-autocomplete>
 </form>
