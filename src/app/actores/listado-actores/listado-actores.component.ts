@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IActor } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 import { ActoresService } from '../actores.service';
 import { HttpResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./listado-actores.component.css'],
 })
 export class ListadoActoresComponent implements OnInit {
-  protected _stars: IActor[];
+  protected _stars: IFormActor[];
   protected _columns: string[];
   protected _length: number;
   protected _pageSize: number;
@@ -31,7 +31,7 @@ export class ListadoActoresComponent implements OnInit {
 
   loadStars(itemsToDisplay: number, pageNumber: number): void {
     this._service.getStars(itemsToDisplay, pageNumber).subscribe({
-      next: (response: HttpResponse<IActor[]>) => {
+      next: (response: HttpResponse<IFormActor[]>) => {
         this._stars = response.body;
         this._length = parseInt(response.headers.get('itemsCount'));
       },

@@ -18,8 +18,8 @@ export class CrearPeliculaComponent implements OnInit {
 
   crearPelicula(pelicula: IFormularioPelicula): void {
     this._service.crearPelicula(pelicula).subscribe({
-      next: (result) => window.alert(`Id de la pelicula creada: ${result}`),
-      error: (error) => window.alert(error),
+      next: (result) => window.alert(`Id de la pelicula creada: ${result.id}`),
+      error: (error) => console.log(error),
     });
   }
 }

@@ -14,7 +14,7 @@
     <mat-error>La fecha de nacimiento es requerida</mat-error>
   </mat-form-field>
 
-  <app-subir-imagen [urlImagenActual]="_star?.photographyURL" (onSelectImage)="setImageFile($event)">
+  <app-subir-imagen [urlImagenActual]="_star?.photography" (onSelectImage)="setImageFile($event)">
     <ng-container buttonText >Seleccionar fotograf&iacute;a</ng-container>
   </app-subir-imagen>
 

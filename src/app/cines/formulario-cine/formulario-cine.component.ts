@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ICine } from 'src/interfaces/ICine';
+import { IFormCinema } from 'src/interfaces/ICine';
 import { ICoordenada } from 'src/interfaces/ICoordenada';
 
 @Component({
@@ -18,13 +18,13 @@ export class FormularioCineComponent implements OnInit {
   protected _coordinates: ICoordenada;
 
   @Input()
-  public cinema: ICine;
+  public cinema: IFormCinema;
 
   @Output()
-  protected _onEmit: EventEmitter<ICine>;
+  protected _onEmit: EventEmitter<IFormCinema>;
 
   public constructor() {
-    this._onEmit = new EventEmitter<ICine>();
+    this._onEmit = new EventEmitter<IFormCinema>();
     this._form = new FormGroup({
       name: new FormControl('', Validators.required),
       latitude: new FormControl('', Validators.required),

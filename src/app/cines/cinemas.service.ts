@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { ICine } from 'src/interfaces/ICine';
+import { IFormCinema } from 'src/interfaces/ICine';
 
 @Injectable({
   providedIn: 'root',
@@ -15,15 +15,15 @@ export class CinemasService {
     this._http = http;
   }
 
-  public crearCinema(cinema: ICine): Observable<number> {
+  public crearCinema(cinema: IFormCinema): Observable<number> {
     return this._http.post<number>(this._apiUrl, cinema);
   }
 
-  public obtenerCinemas(itemsToDisplay: number, pageNumber: number): Observable<HttpResponse<ICine[]>> {
+  public obtenerCinemas(itemsToDisplay: number, pageNumber: number): Observable<HttpResponse<IFormCinema[]>> {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('itemsToDisplay', itemsToDisplay.toString());
     httpParams = httpParams.append('pageNumber', pageNumber.toString());
-    return this._http.get<ICine[]>(this._apiUrl, { observe: 'response', params: httpParams });
+    return this._http.get<IFormCinema[]>(this._apiUrl, { observe: 'response', params: httpParams });
   }
 
   public deleteCinema(cinemaId: number): Observable<any> {

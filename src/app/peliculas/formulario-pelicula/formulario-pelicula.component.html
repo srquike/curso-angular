@@ -1,47 +1,56 @@
-<form [formGroup]="_formulario" (submit)="guardarCambios()">
-
+<form [formGroup]="_form" (submit)="guardarCambios()">
   <mat-form-field appearance="outline">
     <mat-label>T&iacute;tulo</mat-label>
     <input formControlName="title" matInput />
     <mat-error>El campo t&iacute;tulo es requerido</mat-error>
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline">
-      <mat-label>Fecha de estreno</mat-label>
-      <input formControlName="releaseDate" matInput [matDatepicker]="picker" />
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+    <mat-label>Fecha de estreno</mat-label>
+    <input formControlName="releaseDate" matInput [matDatepicker]="picker" />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Trailer URL</mat-label>
     <input formControlName="trailerUrl" matInput />
   </mat-form-field>
-  
+
   <mat-form-field appearance="outline">
     <mat-label>Clasificaci&oacute;n MPAA</mat-label>
-    <input formControlName="mpaaRating" matInput />
+    <mat-select formControlName="mpaaRating">
+      <mat-option *ngFor="let rating of _mpaaRatings" [value]="rating.key">{{rating.value}}</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <h4>Seleccione los g&eacute;neros de la pel&iacute;cula</h4>
-  <app-selector-multiple 
-  [elementosNoSeleccionados]="_generosNoSeleccionados"
-  [elementosSeleccionados]="_generosSeleccionados"></app-selector-multiple>
-  
+  <app-selector-multiple
+    [elementosNoSeleccionados]="_generosNoSeleccionados"
+    [elementosSeleccionados]="_generosSeleccionados"
+  ></app-selector-multiple>
+
   <h4>Seleccione los c&iacute;nes de la pel&iacute;cula</h4>
-  <app-selector-multiple 
-  [elementosNoSeleccionados]="_cinesNoSeleccionados"
-  [elementosSeleccionados]="_cinesSeleccionados"></app-selector-multiple>
+  <app-selector-multiple
+    [elementosNoSeleccionados]="_cinesNoSeleccionados"
+    [elementosSeleccionados]="_cinesSeleccionados"
+  ></app-selector-multiple>
 
   <h4>Seleccionar poster de la pel&iacute;cula</h4>
-  <app-subir-imagen [urlImagenActual]="modelo?.poster" (onSelectImage)="setSelectedImage($event)"></app-subir-imagen>
+  <app-subir-imagen
+    [urlImagenActual]="movie?.poster"
+    (onSelectImage)="setSelectedImage($event)"
+  ></app-subir-imagen>
 
   <h4>Seleccionar actores de la pel&iacute;cula</h4>
-  <app-busqueda-autocompletar [_actoresSeleccionados]="_actoresSeleccionados"></app-busqueda-autocompletar>
+  <app-busqueda-autocompletar
+    [_actoresSeleccionados]="_actoresSeleccionados"
+  ></app-busqueda-autocompletar>
 
   <div>
-      <button mat-flat-button color="primary" [disabled]="_formulario.invalid">Guardar</button>
-      <a mat-stroked-button routerLink="/">Cancelar</a>
+    <button mat-flat-button color="primary" [disabled]="_form.invalid">
+      Guardar
+    </button>
+    <a mat-stroked-button routerLink="/">Cancelar</a>
   </div>
-
 </form>

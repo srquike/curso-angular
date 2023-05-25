@@ -2,7 +2,7 @@ import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
-import { IActorFormulario, IActor } from 'src/interfaces/IActor';
+import { IFormActor, ISearchActor } from 'src/interfaces/IActor';
 
 @Injectable({
   providedIn: 'root',
@@ -18,26 +18,30 @@ export class ActoresService {
   public getStars(
     itemsToDisplay: number,
     pageNumber: number
-  ): Observable<HttpResponse<IActor[]>> {
+  ): Observable<HttpResponse<IFormActor[]>> {
     let httpParams = new HttpParams();
     httpParams = httpParams.append('itemsToDisplay', itemsToDisplay.toString());
     httpParams = httpParams.append('pageNumber', pageNumber.toString());
-    return this._http.get<IActor[]>(this._apiUrl, {
+    return this._http.get<IFormActor[]>(this._apiUrl, {
       observe: 'response',
       params: httpParams,
     });
   }
 
-  public createStar(star: IActorFormulario): Observable<number> {
+  public getByName(name: string): Observable<ISearchActor[]> {
+    return this._http.get<ISearchActor[]>(this._apiUrl + '/' + name);
+  }
+
+  public createStar(star: IFormActor): Observable<number> {
     const starFormData = this.builFormData(star);
     return this._http.post<number>(this._apiUrl, starFormData);
   }
 
-  private builFormData(star: IActorFormulario): FormData {
+  private builFormData(star: IFormActor): FormData {
     const formData = new FormData();
     formData.append('name', star.name);
     formData.append('dateOfBirth', (star.dateOfBirth as Date).toISOString());
-    formData.append('photographyFile', star.photographyFile);
+    formData.append('photographyFile', star.photography);
 
     return formData;
   }
@@ -46,11 +50,11 @@ export class ActoresService {
     return this._http.delete(this._apiUrl + '/' + starId);
   }
 
-  public getStarById(starId: number): Observable<IActor> {
-    return this._http.get<IActor>(this._apiUrl + '/' + starId);
+  public getStarById(starId: number): Observable<IFormActor> {
+    return this._http.get<IFormActor>(this._apiUrl + '/' + starId);
   }
 
-  public editStar(star: IActorFormulario, starId: number): Observable<any> {
+  public editStar(star: IFormActor, starId: number): Observable<any> {
     const starFormData = this.builFormData(star);
     return this._http.put(this._apiUrl + '/' + starId, starFormData);
   }

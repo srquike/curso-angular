@@ -9,16 +9,6 @@ import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
 export class EditarPeliculaComponent implements OnInit {
 
   ngOnInit(): void {
-    this.modelo = {
-      title: 'Spider-Man: No Way Home',
-      releaseDate: new Date().toDateString(),
-      genres: [1, 2],
-      poster: '',
-      cast: [],
-      cinemas: [],
-      mpaaRating: 'PG-13',
-      trailerUrl: ''
-    }
   }
 
 

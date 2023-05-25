@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ICine } from 'src/interfaces/ICine';
+import { IFormCinema } from 'src/interfaces/ICine';
 import { CinemasService } from '../cinemas.service';
 import { HttpResponse } from '@angular/common/http';
 import { PageEvent } from '@angular/material/paginator';
@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
 export class ListadoCinesComponent implements OnInit {
   private _service: CinemasService;
 
-  protected _cinemas: ICine[];
+  protected _cinemas: IFormCinema[];
   protected _columns: string[];
   protected _length: number;
   protected _pageSize: number;
@@ -32,7 +32,7 @@ export class ListadoCinesComponent implements OnInit {
 
   loadCinemas(itemsToDisplay: number, pageNumber: number): void {
     this._service.obtenerCinemas(itemsToDisplay, pageNumber).subscribe({
-      next: (response: HttpResponse<ICine[]>) => {
+      next: (response: HttpResponse<IFormCinema[]>) => {
         this._cinemas = response.body;
         this._length = parseInt(response.headers.get('itemsCount'));
       },

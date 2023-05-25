@@ -1,4 +1,4 @@
 export interface IElementoSelectorMultiple {
-  llave: number;
-  valor: string;
+  key: number | string;
+  value: string;
 }

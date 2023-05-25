@@ -9,7 +9,7 @@ import { aBase64 } from '../utilidades';
 export class SubirImagenComponent {
   
   @Input()
-  public urlImagenActual: string;
+  public urlImagenActual: string | File;
 
   @Output()
   protected onSelectImage: EventEmitter<File>;

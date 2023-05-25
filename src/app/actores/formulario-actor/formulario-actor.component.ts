@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { IActorFormulario, IActor } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-formulario-actor',
@@ -17,13 +17,13 @@ export class FormularioActorComponent implements OnInit {
   private _formBuilder: FormBuilder;
 
   @Input()
-  modelo: IActor;
+  modelo: IFormActor;
 
   @Output()
-  protected submitActor: EventEmitter<IActorFormulario>;
+  protected submitActor: EventEmitter<IFormActor>;
 
   constructor(formBuilder: FormBuilder) {
-    this.submitActor = new EventEmitter<IActorFormulario>();
+    this.submitActor = new EventEmitter<IFormActor>();
     this._formBuilder = formBuilder;
   }
 

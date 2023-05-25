@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ICine } from 'src/interfaces/ICine';
+import { IFormCinema } from 'src/interfaces/ICine';
 import { CinemasService } from '../cinemas.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class CrearCineComponent {
     this._router = router;
   }
 
-  createCinema(cinema: ICine): void {
+  createCinema(cinema: IFormCinema): void {
     this._service.crearCinema(cinema).subscribe({
       next: (createdCinemaId) => {
         console.log(createdCinemaId);

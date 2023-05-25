@@ -3,7 +3,8 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTable } from '@angular/material/table';
-import { IActor } from 'src/interfaces/IActor';
+import { ActoresService } from 'src/app/actores/actores.service';
+import { ISearchActor, IFormActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-busqueda-autocompletar',
@@ -11,29 +12,38 @@ import { IActor } from 'src/interfaces/IActor';
   styleUrls: ['./busqueda-autocompletar.component.css'],
 })
 export class BusquedaAutocompletarComponent implements OnInit {
+  private _service: ActoresService;
+
   protected _control: FormControl;
-  protected _actores: IActor[];
-  protected _actoresDefecto: IActor[];
+  protected _actores: IFormActor[];
+  protected _actoresDefecto: IFormActor[];
+  protected _columnas: string[];
+  protected _searchResults: ISearchActor[];
 
   @Input()
-  public _actoresSeleccionados: IActor[];
-  protected _columnas: string[];
+  public _actoresSeleccionados: ISearchActor[];
 
   @ViewChild(MatTable)
   protected _table: MatTable<any>;
 
-  public constructor() {
+  public constructor(service: ActoresService) {
+    this._service = service;
     this._control = new FormControl();
     this._actores = [];
     this._actoresDefecto = this._actores;
     this._actoresSeleccionados = [];
+    this._searchResults = [];
     this._columnas = ['foto', 'nombre', 'personaje', 'acciones'];
   }
 
   ngOnInit(): void {
     this._control.valueChanges.subscribe((valor) => {
-      this._actores = this._actoresDefecto;
-      this._actores = this._actores.filter((a) => a.name.indexOf(valor) !== -1);
+      if (valor !== '') {
+        this._service.getByName(valor).subscribe({
+          next: (results) => (this._searchResults = results),
+          error: (error) => console.log(error),
+        });
+      }
     });
   }
 
@@ -46,7 +56,7 @@ export class BusquedaAutocompletarComponent implements OnInit {
     }
   }
 
-  eliminarSeleccion(actor: IActor): void {
+  eliminarSeleccion(actor: IFormActor): void {
     const i = this._actoresSeleccionados.findIndex(
       (a) => a.name === actor.name
     );

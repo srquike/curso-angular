@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ICine } from 'src/interfaces/ICine';
+import { IFormCinema } from 'src/interfaces/ICine';
 
 @Component({
   selector: 'app-editar-cine',
@@ -7,7 +7,7 @@ import { ICine } from 'src/interfaces/ICine';
   styleUrls: ['./editar-cine.component.css'],
 })
 export class EditarCineComponent {
-  protected _modelo: ICine;
+  protected _modelo: IFormCinema;
 
   public constructor() {
     this._modelo = {
@@ -18,5 +18,5 @@ export class EditarCineComponent {
     };
   }
 
-  editarCine(cine: ICine): void {}
+  editarCine(cine: IFormCinema): void {}
 }

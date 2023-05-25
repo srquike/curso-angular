@@ -16,22 +16,6 @@ export class BuscarPeliculasComponent implements OnInit {
     this.formulario = this.formBuilder.group(this.camposPorDefecto);
 
     this.generos = [
-      { id: 1, name: 'Accion' },
-      { id: 2, name: 'Drama' },
-      { id: 3, name: 'Comedia' },
-    ];
-
-    this.peliculas = [
-      {
-        title: 'Spider-Man: No Way Home',
-        releaseDate: new Date().toDateString(),
-        genres: [1, 2],
-        poster: '',
-        cast: [],
-        cinemas: [],
-        mpaaRating: 'PG-13',
-        trailerUrl: ''
-      }
     ]
 
     this.peliculasPorDefecto = this.peliculas;

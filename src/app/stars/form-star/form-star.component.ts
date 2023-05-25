@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { IActor, IActorFormulario } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-form-star',
@@ -9,10 +9,10 @@ import { IActor, IActorFormulario } from 'src/interfaces/IActor';
 })
 export class FormStarComponent implements OnInit {
   @Output()
-  protected _onEmit: EventEmitter<IActorFormulario>;
+  protected _onEmit: EventEmitter<IFormActor>;
 
   @Input()
-  public _star: IActor;
+  public _star: IFormActor;
   
   protected _form: FormGroup;
 
@@ -20,13 +20,14 @@ export class FormStarComponent implements OnInit {
     this._form = new FormGroup({
       name: new FormControl('', Validators.required),
       dateOfBirth: new FormControl('', Validators.required),
-      photographyFile: new FormControl(''),
+      photography: new FormControl(''),
     });
-    this._onEmit = new EventEmitter<IActorFormulario>();
+    this._onEmit = new EventEmitter<IFormActor>();
   }
 
   ngOnInit(): void {
     if (this._star !== undefined) {
+      this._star.dateOfBirth
       this._form.patchValue(this._star);
     }
   }
@@ -36,6 +37,6 @@ export class FormStarComponent implements OnInit {
   }
 
   setImageFile(imageFile: File): void {
-    this._form.get('photographyFile').setValue(imageFile);
+    this._form.get('photography').setValue(imageFile);
   }
 }

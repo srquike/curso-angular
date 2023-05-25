@@ -4,7 +4,7 @@
       *ngFor="let elemento of elementosNoSeleccionados; let i = index"
       (click)="seleccionarElemento(elemento, i)"
     >
-      {{ elemento.valor }}
+      {{ elemento.value }}
     </li>
   </ul>
   <div class="contenedor-botones">
@@ -20,7 +20,7 @@
       *ngFor="let elemento of elementosSeleccionados; let i = index"
       (click)="deseleccionarElemento(elemento, i)"
     >
-      {{ elemento.valor }}
+      {{ elemento.value }}
     </li>
   </ul>
 </div>

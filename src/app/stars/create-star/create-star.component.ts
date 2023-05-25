@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ActoresService } from 'src/app/actores/actores.service';
-import { IActorFormulario } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-create-star',
@@ -18,7 +18,7 @@ export class CreateStarComponent {
     this._router = router;
   }
 
-  protected createStar(star: IActorFormulario): void {
+  protected createStar(star: IFormActor): void {
     this._service.createStar(star).subscribe({
       next: (createdStarId) => {
         console.log(createdStarId);

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IActorFormulario } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 import { ActoresService } from '../actores.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class CrearActorComponent {
     this._router = router;
   }
 
-  createStar(star: IActorFormulario): void {
+  createStar(star: IFormActor): void {
     this._service.createStar(star).subscribe({
       next: (createdStarId) => {
         console.log(createdStarId);

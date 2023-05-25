@@ -1,8 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { IActor } from 'src/interfaces/IActor';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ISearchActor, IFormActor, ICharacter } from 'src/interfaces/IActor';
 import { IElementoSelectorMultiple } from 'src/interfaces/IElementoSelectorMultiple';
 import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
+import { PeliculasService } from '../peliculas.service';
 
 @Component({
   selector: 'app-formulario-pelicula',
@@ -10,68 +11,89 @@ import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
   styleUrls: ['./formulario-pelicula.component.css'],
 })
 export class FormularioPeliculaComponent implements OnInit {
+  private _service: PeliculasService;
+
   @Input()
-  public modelo: IPelicula;
+  public movie: IPelicula;
 
   @Output()
-  protected _onSubmitPelicula: EventEmitter<IFormularioPelicula>;
+  protected _onSubmit: EventEmitter<IFormularioPelicula>;
 
-  protected _formulario: FormGroup;
+  @Input()
+  public _actoresSeleccionados: ISearchActor[];
 
-  protected _generosNoSeleccionados: IElementoSelectorMultiple[] = [
-    { llave: 1, valor: 'Comedia' },
-    { llave: 2, valor: 'Terror' },
-    { llave: 3, valor: 'Acción' },
-  ];
+  protected _form: FormGroup;
+  protected _generosNoSeleccionados: IElementoSelectorMultiple[];
+  protected _cinesNoSeleccionados: IElementoSelectorMultiple[];
+  protected _generosSeleccionados: IElementoSelectorMultiple[];
+  protected _cinesSeleccionados: IElementoSelectorMultiple[];
+  protected _mpaaRatings: IElementoSelectorMultiple[];
 
-  protected _cinesNoSeleccionados: IElementoSelectorMultiple[] = [
-    { llave: 1, valor: 'Cinépolis' },
-    { llave: 2, valor: 'Cinemark' },
-  ];
-
-  protected _generosSeleccionados: IElementoSelectorMultiple[] = [];
-  protected _cinesSeleccionados: IElementoSelectorMultiple[] = [];
-  protected _actoresSeleccionados: IActor[] = [];
-
-  public constructor(formBuilder: FormBuilder) {
-    this._onSubmitPelicula = new EventEmitter<IFormularioPelicula>();
-    this._formulario = formBuilder.group({
-      title: [
-        '',
-        {
-          validators: [Validators.required],
-        },
-      ],
-      releaseDate: '',
-      trailerUrl: '',
-      mpaaRating: '',
-      poster: '',
-      genres: [],
-      cinemas: [],
-      cast: [],
+  public constructor(service: PeliculasService) {
+    this._service = service;
+    this._onSubmit = new EventEmitter<IFormularioPelicula>();
+    this._generosSeleccionados = [];
+    this._cinesSeleccionados = [];
+    this._actoresSeleccionados = [];
+    this._form = new FormGroup({
+      title: new FormControl('', Validators.required),
+      releaseDate: new FormControl(''),
+      trailerUrl: new FormControl(''),
+      mpaaRating: new FormControl(''),
+      posterFile: new FormControl(''),
+      genres: new FormControl(''),
+      cinemas: new FormControl(''),
+      cast: new FormControl(''),
     });
+    this._mpaaRatings = [
+      { key: 'G', value: 'G - General Audiences' },
+      { key: 'PG', value: 'PG - Parental Guidance Suggested' },
+      { key: 'PG-13', value: 'PG-13 - Parents Strongly Cautioned' },
+      { key: 'R', value: 'R - Restricted' },
+      { key: 'NC-17', value: 'NC-17 - Adults Only' },
+    ];
   }
 
   ngOnInit(): void {
-    if (this.modelo !== undefined) {
-      this._formulario.patchValue(this.modelo);
+    this._service.getResources().subscribe({
+      next: (result) => {
+        this._generosNoSeleccionados = result.genres.map((g) => {
+          return <IElementoSelectorMultiple>{
+            key: g.id,
+            value: g.name,
+          };
+        });
+        this._cinesNoSeleccionados = result.cinemas.map((c) => {
+          return <IElementoSelectorMultiple>{
+            key: c.id,
+            value: c.name,
+          };
+        });
+      },
+    });
+    if (this.movie !== undefined) {
+      this._form.patchValue(this.movie);
     }
   }
 
   guardarCambios(): void {
-    const generos = this._generosSeleccionados.map((genero) => genero.llave);
-    this._formulario.get('genres').setValue(generos);
+    const generos = this._generosSeleccionados.map((genero) => genero.key);
+    this._form.get('genres').setValue(generos);
 
-    const cines = this._cinesSeleccionados.map((cine) => cine.llave);
-    this._formulario.get('cinemas').setValue(cines);
+    const cines = this._cinesSeleccionados.map((cine) => cine.key);
+    this._form.get('cinemas').setValue(cines);
 
-    const actores = this._actoresSeleccionados.map((actor) => actor.id);
-    this._formulario.get('cast').setValue(actores);
+    const actores = this._actoresSeleccionados.map((actor, index) => <ICharacter> {
+      starId: actor.id,
+      character: actor.character,
+      order: index
+    });
+    this._form.get('cast').setValue(actores);
 
-    this._onSubmitPelicula.emit(this._formulario.value);
+    this._onSubmit.emit(this._form.value);
   }
 
   setSelectedImage(image: File): void {
-    this._formulario.get('poster').setValue(image);
+    this._form.get('posterFile').setValue(image);
   }
 }

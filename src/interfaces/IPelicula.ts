@@ -1,10 +1,14 @@
+import { ICharacter } from "./IActor";
+import { ICinemaBase } from "./ICine";
+import { IGenero } from "./IGenero";
+
 interface IPeliculaBase {
   title: string;
-  releaseDate: string;
+  releaseDate: Date;
   trailerUrl: string;
   mpaaRating: string;
   genres: number[];
-  cast: number[];
+  cast: ICharacter[];
   cinemas: number[];
 }
 
@@ -13,5 +17,10 @@ export interface IPelicula extends IPeliculaBase {
 }
 
 export interface IFormularioPelicula extends IPeliculaBase{
-  poster: File;
+  posterFile: File;
+}
+
+export interface IMovieResources {
+  cinemas: ICinemaBase[],
+  genres: IGenero[]
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IActorFormulario, IActor } from 'src/interfaces/IActor';
+import { IFormActor } from 'src/interfaces/IActor';
 import { ActoresService } from '../actores.service';
 
 @Component({
@@ -14,7 +14,7 @@ export class EditarActorComponent implements OnInit {
   private _router: Router;
 
   protected _starId: number;
-  protected _star: IActor;
+  protected _star: IFormActor;
 
   constructor(
     activateRoute: ActivatedRoute,
@@ -39,7 +39,7 @@ export class EditarActorComponent implements OnInit {
     });
   }
 
-  editStar(star: IActorFormulario): void {
+  editStar(star: IFormActor): void {
     this._service.editStar(star, this._starId).subscribe({
       next: () => {
         this._router.navigate(['/actores']);
