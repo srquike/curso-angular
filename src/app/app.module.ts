@@ -39,6 +39,7 @@ import { BusquedaAutocompletarComponent } from './utilidades/busqueda-autocomple
 import { CreateStarComponent } from './stars/create-star/create-star.component';
 import { FormStarComponent } from './stars/form-star/form-star.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-pelicula.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     BusquedaAutocompletarComponent,
     CreateStarComponent,
     FormStarComponent,
+    DetallePeliculaComponent,
   ],
   imports: [
     BrowserModule,
