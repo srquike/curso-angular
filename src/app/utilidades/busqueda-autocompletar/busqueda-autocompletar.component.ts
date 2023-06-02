@@ -48,7 +48,12 @@ export class BusquedaAutocompletarComponent implements OnInit {
   }
 
   onOptionSelected(e: MatAutocompleteSelectedEvent): void {
-    this._actoresSeleccionados.push(e.option.value);
+    let starSelected = <ISearchActor>e.option.value;
+    this._actoresSeleccionados.push(<IActorPelicula>{
+      starId: starSelected.id,
+      starName: starSelected.name,
+      photographyUrl: starSelected.photographyUrl
+    });
     this._control.patchValue('');
 
     if (this._table !== undefined) {

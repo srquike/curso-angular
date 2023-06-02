@@ -1,12 +1,24 @@
 <app-listado-generico [listado]="movies">
   <ng-container contenido>
     <div class="peliculas-contenedor">
-      <div *ngFor="let movie of movies; let i = index" class="pelicula-contenedor">
-        <a [routerLink]="'/peliculas/' + movie.id"><img [src]="movie.posterUrl" alt="Poster de la pelicula" ></a>
-        <p><a [routerLink]="'/peliculas/' + movie.id">{{movie.title}}</a></p>
+      <div
+        *ngFor="let movie of movies; let i = index"
+        class="pelicula-contenedor"
+      >
+        <a [routerLink]="'/peliculas/' + movie.id"
+          ><img [src]="movie.posterUrl" alt="Poster de la pelicula"
+        /></a>
+        <p>
+          <a [routerLink]="'/peliculas/' + movie.id">{{ movie.title }}</a>
+        </p>
         <div>
-          <a mat-flat-button color="primary" [routerLink]="'/peliculas/editar/' + movie.id">Editar</a>
-          <button mat-flat-button color="warn" type="button">Borrar</button>
+          <a
+            mat-flat-button
+            color="primary"
+            [routerLink]="'/peliculas/editar/' + movie.id"
+            >Editar</a
+          >
+          <button mat-flat-button color="warn" type="button" (click)="delete(movie.id, movie.title)">Borrar</button>
         </div>
       </div>
     </div>

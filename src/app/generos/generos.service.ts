@@ -9,7 +9,7 @@ import { IGenero } from 'src/interfaces/IGenero';
 })
 export class GenerosService {
   private _http: HttpClient;
-  private _apiUrl: string = environment.apiUrl + 'Genres';
+  private _apiUrl: string = environment.apiUrl + 'Genres/';
 
   public constructor(http: HttpClient) {
     this._http = http;
@@ -20,6 +20,10 @@ export class GenerosService {
     httpParams = httpParams.append('itemsToDisplay', itemsToDisplay.toString());
     httpParams = httpParams.append('pageNumber', pageNumber.toString());
     return this._http.get<IGenero[]>(this._apiUrl, { observe: 'response', params: httpParams });
+  }
+
+  public get(): Observable<IGenero[]> {
+    return this._http.get<IGenero[]>(this._apiUrl + 'all');
   }
 
   public crearGenero(genero: IGenero): Observable<number> {

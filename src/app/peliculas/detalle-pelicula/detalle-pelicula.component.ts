@@ -33,7 +33,6 @@ export class DetallePeliculaComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params) => {
       this.service.getById(params['id']).subscribe((movie) => {
-        console.log(movie);
         this.movie = movie;
         this.releaseDate = new Date(this.movie.releaseDate);
         this.trailerUrl = this.generateEmbedUrl(this.movie.trailerUrl);

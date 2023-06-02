@@ -2,13 +2,13 @@ export interface IFormActor {
   id: number;
   name: string;
   dateOfBirth: Date | string;
-  photography: File | string;
+  photographyUrl: File | string;
 }
 
 export interface ISearchActor {
   id: number;
   name: string;
-  photography: string;
+  photographyUrl: string;
   character?: string;
 }
 

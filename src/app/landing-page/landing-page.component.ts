@@ -21,6 +21,10 @@ export class LandingPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.load();
+  }
+
+  protected load(): void {
     this.service.getLandingPageResources().subscribe(landingPageResources => {
       this.comingSoon = landingPageResources.comingSoon;
       this.onCinemas = landingPageResources.onCinemas;

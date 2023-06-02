@@ -1,25 +1,37 @@
 <h2>Buscar pel&iacute;culas</h2>
-<form [formGroup]="formulario">
+
+<form [formGroup]="form" *ngIf="movies">
   <mat-form-field appearance="outline">
     <mat-label>T&iacute;tulo</mat-label>
-    <input formControlName="titulo" matInput />
+    <input formControlName="title" matInput />
   </mat-form-field>
   <mat-form-field appearance="outline">
-      <mat-label>G&eacute;nero</mat-label>
-      <mat-select formControlName="generoId">
-            <mat-option *ngFor="let genero of generos" [value]="genero.id">{{genero.name}}
-            </mat-option>
-      </mat-select>
+    <mat-label>G&eacute;nero</mat-label>
+    <mat-select formControlName="genre">
+      <mat-option *ngFor="let genero of genres" [value]="genero.id"
+        >{{ genero.name }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
   <div>
-      <mat-checkbox formControlName="esProximoEstreno">Pr&oacute;ximos estrenos</mat-checkbox>
-  </div>
-  <div>
-      <mat-checkbox formControlName="esEnCines">En cines</mat-checkbox>
+    <mat-checkbox formControlName="comingSoon">Pr&oacute;ximos estrenos</mat-checkbox>
   </div>
   <div class="contenedor-limpiar">
-      <button mat-flat-button (click)="limpiarBusqueda()" color="warn">Limpiar busqueda</button>
+    <button mat-flat-button (click)="clearSearch()" color="warn">
+      Limpiar busqueda
+    </button>
   </div>
 </form>
 
-<app-listado-peliculas [movies]="peliculas"></app-listado-peliculas>
+<app-listado-peliculas [movies]="movies" (onDelete)="search(form.value)"></app-listado-peliculas>
+
+<mat-paginator
+  [pageSizeOptions]="[5, 10, 20, 50]"
+  showFirstLastButtons
+  [length]="length"
+  [pageSize]="pageSize"
+  (page)="page($event)"
+  class="mat-elevation-z8"
+  MatPaginator
+>
+</mat-paginator>

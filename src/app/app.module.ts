@@ -40,6 +40,7 @@ import { CreateStarComponent } from './stars/create-star/create-star.component';
 import { FormStarComponent } from './stars/form-star/form-star.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-pelicula.component';
+import { AuthorizerComponent } from './security/authorizer/authorizer.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-p
     CreateStarComponent,
     FormStarComponent,
     DetallePeliculaComponent,
+    AuthorizerComponent,
   ],
   imports: [
     BrowserModule,

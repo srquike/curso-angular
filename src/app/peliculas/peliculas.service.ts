@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
@@ -20,6 +20,15 @@ export class PeliculasService {
 
   public constructor(http: HttpClient) {
     this._http = http;
+  }
+
+  public delete(id: number): Observable<number> {
+    return this._http.delete<number>(this._apiUrl + '/' + id);
+  }
+
+  public get(values: any): Observable<HttpResponse<IPelicula[]>> {
+    const params = new HttpParams({fromObject: values});
+    return this._http.get<IPelicula[]>(this._apiUrl, {params: params, observe: 'response'});
   }
 
   public getLandingPageResources(): Observable<IMovieLandigPage> {
@@ -51,7 +60,7 @@ export class PeliculasService {
     formData.append('posterFile', movie.posterFile);
     formData.append('trailerUrl', movie.trailerUrl);
     formData.append('mpaaRating', movie.mpaaRating);
-    formData.append('cast', JSON.stringify(movie.cast));
+    formData.append('casting', JSON.stringify(movie.cast));
     formData.append('genres', JSON.stringify(movie.genres));
     formData.append('cinemas', JSON.stringify(movie.cinemas));
     return formData;
