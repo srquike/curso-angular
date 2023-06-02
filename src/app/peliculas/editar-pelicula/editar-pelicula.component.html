@@ -1,2 +1,16 @@
 <h2>Editar pel&iacute;cula</h2>
-<app-formulario-pelicula (_onSubmit)="editarPelicula($event)" [movie]="modelo"></app-formulario-pelicula>
+<app-formulario-pelicula
+  *ngIf="movie"
+  (_onSubmit)="edit($event)"
+  [movie]="movie"
+  [_generosNoSeleccionados]="noSelectedGenres"
+  [_generosSeleccionados]="genres"
+  [_cinesNoSeleccionados]="noSelectedCinemas"
+  [_cinesSeleccionados]="cinemas"
+  [_actoresSeleccionados]="cast"
+></app-formulario-pelicula>
+
+<div *ngIf="!movie">
+  <p>Cargando informaci&oacute;n de la pel&iacute;cula, por favor espere...</p>
+  <mat-spinner></mat-spinner>
+</div>

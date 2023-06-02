@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { MatTable } from '@angular/material/table';
 import { ActoresService } from 'src/app/actores/actores.service';
-import { ISearchActor, IFormActor } from 'src/interfaces/IActor';
+import { ISearchActor, IFormActor, IActorPelicula } from 'src/interfaces/IActor';
 
 @Component({
   selector: 'app-busqueda-autocompletar',
@@ -21,7 +21,7 @@ export class BusquedaAutocompletarComponent implements OnInit {
   protected _searchResults: ISearchActor[];
 
   @Input()
-  public _actoresSeleccionados: ISearchActor[];
+  public _actoresSeleccionados: IActorPelicula[];
 
   @ViewChild(MatTable)
   protected _table: MatTable<any>;
@@ -58,7 +58,7 @@ export class BusquedaAutocompletarComponent implements OnInit {
 
   eliminarSeleccion(actor: IFormActor): void {
     const i = this._actoresSeleccionados.findIndex(
-      (a) => a.name === actor.name
+      (a) => a.starName === actor.name
     );
     this._actoresSeleccionados.splice(i, 1);
     this._table.renderRows();

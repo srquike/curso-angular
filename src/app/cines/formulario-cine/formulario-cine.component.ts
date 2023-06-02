@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { IFormCinema } from 'src/interfaces/ICine';
-import { ICoordenada } from 'src/interfaces/ICoordenada';
+import { ICoordenada, ILocation } from 'src/interfaces/ICoordenada';
 
 @Component({
   selector: 'app-formulario-cine',
@@ -15,7 +15,7 @@ import { ICoordenada } from 'src/interfaces/ICoordenada';
 })
 export class FormularioCineComponent implements OnInit {
   protected _form: FormGroup;
-  protected _coordinates: ICoordenada;
+  protected _coordinates: ILocation[];
 
   @Input()
   public cinema: IFormCinema;
@@ -30,15 +30,16 @@ export class FormularioCineComponent implements OnInit {
       latitude: new FormControl('', Validators.required),
       longitude: new FormControl('', Validators.required),
     });
+    this._coordinates = [];
   }
 
   ngOnInit(): void {
     if (this.cinema !== undefined) {
       this._form.patchValue(this.cinema);
-      this._coordinates = {
+      this._coordinates.push({
         latitude: this.cinema.latitude,
         longitude: this.cinema.longitude,
-      };
+      });
     }
   }
 

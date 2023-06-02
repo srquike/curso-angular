@@ -5,11 +5,18 @@
     <mat-error *ngIf="_form.invalid">El campo es requerido.</mat-error>
   </mat-form-field>
 
-  <h4>Seleccione la ubicaci&oacute;n del cine</h4>
-  <app-mapa (submitCoordenada)="obtenerCoordenadas($event)" [coordinate]="_coordinates"></app-mapa>
+  <div class="cinemas-map">
+    <h4>Seleccione la ubicaci&oacute;n del cine</h4>
+    <app-mapa
+      (submitCoordenada)="obtenerCoordenadas($event)"
+      [coordinates]="_coordinates"
+    ></app-mapa>
+  </div>
 
-  <div>
-      <button mat-flat-button color="primary" [disabled]="_form.invalid">Guardar</button>
-      <a mat-stroked-button routerLink="/cines">Cancelar</a>
+  <div class="option-buttons">
+    <button mat-flat-button color="primary" [disabled]="_form.invalid">
+      Guardar
+    </button>
+    <a mat-stroked-button routerLink="/cines">Cancelar</a>
   </div>
 </form>

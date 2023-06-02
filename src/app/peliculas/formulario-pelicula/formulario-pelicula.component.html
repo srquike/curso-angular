@@ -19,7 +19,7 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Clasificaci&oacute;n MPAA</mat-label>
-    <mat-select formControlName="mpaaRating">
+    <mat-select formControlName="mpaaRating" #mpaaRatings>
       <mat-option *ngFor="let rating of _mpaaRatings" [value]="rating.key">{{rating.value}}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -38,7 +38,7 @@
 
   <h4>Seleccionar poster de la pel&iacute;cula</h4>
   <app-subir-imagen
-    [urlImagenActual]="movie?.poster"
+    [urlImagenActual]="movie?.posterUrl"
     (onSelectImage)="setSelectedImage($event)"
   ></app-subir-imagen>
 

@@ -1,0 +1,62 @@
+.movie-information {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  align-items: center;
+}
+
+.movie-information span {
+  margin-left: 1rem;
+}
+
+.movie-poster {
+  display: inline;
+  margin-right: 1rem;
+}
+
+.movie-poster img {
+  width: 225px;
+  height: 315px;
+}
+
+.movie-trailer {
+  margin-right: 1rem;
+}
+
+.movie-trailer iframe {
+  width: 560px;
+  height: 315px;
+}
+
+.movie-media {
+  display: flex;
+  flex-direction: row;
+}
+
+.star-photography {
+  width: 50px;
+  vertical-align: middle;
+  margin-right: 1rem;
+}
+
+.star-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.star-info {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+}
+
+.cast {
+  display: flex;
+  flex-direction: row;
+}
+
+.cinemas-map {
+  position: relative;
+  width: 100%;
+}

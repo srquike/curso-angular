@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ISearchActor, IFormActor, ICharacter } from 'src/interfaces/IActor';
+import { MatSelect } from '@angular/material/select';
+import { ICharacter, IActorPelicula } from 'src/interfaces/IActor';
 import { IElementoSelectorMultiple } from 'src/interfaces/IElementoSelectorMultiple';
 import { IFormularioPelicula, IPelicula } from 'src/interfaces/IPelicula';
-import { PeliculasService } from '../peliculas.service';
 
 @Component({
   selector: 'app-formulario-pelicula',
@@ -11,7 +11,8 @@ import { PeliculasService } from '../peliculas.service';
   styleUrls: ['./formulario-pelicula.component.css'],
 })
 export class FormularioPeliculaComponent implements OnInit {
-  private _service: PeliculasService;
+
+  @ViewChild('mpaaRatings') mpaaRatings: MatSelect;
 
   @Input()
   public movie: IPelicula;
@@ -20,17 +21,24 @@ export class FormularioPeliculaComponent implements OnInit {
   protected _onSubmit: EventEmitter<IFormularioPelicula>;
 
   @Input()
-  public _actoresSeleccionados: ISearchActor[];
+  public _actoresSeleccionados: IActorPelicula[];
+
+  @Input()
+  public _generosNoSeleccionados: IElementoSelectorMultiple[];
+
+  @Input()
+  public _cinesNoSeleccionados: IElementoSelectorMultiple[];
+
+  @Input()
+  public _generosSeleccionados: IElementoSelectorMultiple[];
+
+  @Input()
+  public _cinesSeleccionados: IElementoSelectorMultiple[];
 
   protected _form: FormGroup;
-  protected _generosNoSeleccionados: IElementoSelectorMultiple[];
-  protected _cinesNoSeleccionados: IElementoSelectorMultiple[];
-  protected _generosSeleccionados: IElementoSelectorMultiple[];
-  protected _cinesSeleccionados: IElementoSelectorMultiple[];
   protected _mpaaRatings: IElementoSelectorMultiple[];
 
-  public constructor(service: PeliculasService) {
-    this._service = service;
+  public constructor() {
     this._onSubmit = new EventEmitter<IFormularioPelicula>();
     this._generosSeleccionados = [];
     this._cinesSeleccionados = [];
@@ -55,22 +63,6 @@ export class FormularioPeliculaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this._service.getResources().subscribe({
-      next: (result) => {
-        this._generosNoSeleccionados = result.genres.map((g) => {
-          return <IElementoSelectorMultiple>{
-            key: g.id,
-            value: g.name,
-          };
-        });
-        this._cinesNoSeleccionados = result.cinemas.map((c) => {
-          return <IElementoSelectorMultiple>{
-            key: c.id,
-            value: c.name,
-          };
-        });
-      },
-    });
     if (this.movie !== undefined) {
       this._form.patchValue(this.movie);
     }
@@ -83,11 +75,14 @@ export class FormularioPeliculaComponent implements OnInit {
     const cines = this._cinesSeleccionados.map((cine) => cine.key);
     this._form.get('cinemas').setValue(cines);
 
-    const actores = this._actoresSeleccionados.map((actor, index) => <ICharacter> {
-      starId: actor.id,
-      character: actor.character,
-      order: index
-    });
+    const actores = this._actoresSeleccionados.map(
+      (actor, index) =>
+        <ICharacter>{
+          starId: actor.starId,
+          character: actor.character,
+          order: index,
+        }
+    );
     this._form.get('cast').setValue(actores);
 
     this._onSubmit.emit(this._form.value);

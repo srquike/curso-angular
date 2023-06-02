@@ -1,8 +1,8 @@
-import { ICharacter } from "./IActor";
-import { ICinemaBase } from "./ICine";
-import { IGenero } from "./IGenero";
+import { IActorPelicula, ICharacter } from './IActor';
+import { ICinemaBase, IFormCinema } from './ICine';
+import { IGenero } from './IGenero';
 
-interface IPeliculaBase {
+export interface IPeliculaBase {
   title: string;
   releaseDate: Date;
   trailerUrl: string;
@@ -12,15 +12,42 @@ interface IPeliculaBase {
   cinemas: number[];
 }
 
-export interface IPelicula extends IPeliculaBase {
-  poster: string;
+export interface IPeliculaDetails {
+  id: number;
+  title: string;
+  releaseDate: Date;
+  trailerUrl: string;
+  posterUrl: string;
+  mpaaRating: string;
+  genres: IGenero[];
+  cinemas: IFormCinema[];
+  cast: IActorPelicula[];
 }
 
-export interface IFormularioPelicula extends IPeliculaBase{
+export interface IPelicula extends IPeliculaBase {
+  posterUrl: string;
+  id?: number;
+}
+
+export interface IFormularioPelicula extends IPeliculaBase {
   posterFile: File;
 }
 
 export interface IMovieResources {
-  cinemas: ICinemaBase[],
-  genres: IGenero[]
+  cinemas: ICinemaBase[];
+  genres: IGenero[];
+}
+
+export interface IMovieLandigPage {
+  onCinemas: IPelicula[];
+  comingSoon: IPelicula[];
+}
+
+export interface IMovieForEditing {
+  movie: IPelicula;
+  genres: IGenero[];
+  noSelectedGenres: IGenero[];
+  cinemas: IFormCinema[];
+  noSelectedCinemas: IFormCinema[];
+  cast: IActorPelicula[]
 }

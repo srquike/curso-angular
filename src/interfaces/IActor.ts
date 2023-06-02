@@ -17,3 +17,11 @@ export interface ICharacter {
   character: string;
   order: number;
 }
+
+export interface IActorPelicula {
+  starId: number;
+  character: string;
+  starName: string;
+  order: number;
+  photographyUrl: string;
+}

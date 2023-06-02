@@ -1,3 +1,11 @@
 button {
   margin-right: 1rem;
 }
+
+.cinemas-map {
+  position: relative;
+}
+
+.option-buttons {
+  margin-top: 350px;
+}

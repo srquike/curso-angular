@@ -7,7 +7,7 @@ import {
   marker,
   tileLayer,
 } from 'leaflet';
-import { ICoordenada } from 'src/interfaces/ICoordenada';
+import { ICoordenada, ILocation } from 'src/interfaces/ICoordenada';
 
 @Component({
   selector: 'app-mapa',
@@ -16,7 +16,10 @@ import { ICoordenada } from 'src/interfaces/ICoordenada';
 })
 export class MapaComponent implements OnInit {
   @Input()
-  public coordinate: ICoordenada;
+  public coordinates: ILocation[];
+
+  @Input()
+  public readOnly: boolean;
 
   @Output()
   protected submitCoordenada: EventEmitter<ICoordenada>;
@@ -24,12 +27,21 @@ export class MapaComponent implements OnInit {
   public constructor() {
     this.submitCoordenada = new EventEmitter<ICoordenada>();
     this.capaMarcadores = [];
+    this.coordinates = [];
+    this.readOnly = false;
   }
 
   ngOnInit(): void {
-    if (this.coordinate !== undefined) {
-      this.colocarMarcador(this.coordinate);
-    }
+    this.options.center = latLng(this.coordinates[0].latitude, this.coordinates[0].longitude);
+    this.capaMarcadores = this.coordinates.map((c) => {
+      let mark = marker([c.latitude, c.longitude]);
+
+      if (c.cinemaName) {
+        mark.bindPopup(c.cinemaName, { autoClose: false, autoPan: false });
+      }
+
+      return mark;
+    });
   }
 
   private colocarMarcador(coordenadas: ICoordenada) {
@@ -54,18 +66,20 @@ export class MapaComponent implements OnInit {
         attribution: '...',
       }),
     ],
-    zoom: 15,
+    zoom: 9,
     center: latLng(13.699202512494862, -89.19183969497682),
   };
 
   protected capaMarcadores: Marker<any>[];
 
   marcarUbicacion(event: LeafletMouseEvent) {
-    let coordenadas: ICoordenada = {
-      latitude: event.latlng.lat,
-      longitude: event.latlng.lng,
-    };
-    this.colocarMarcador(coordenadas);
-    this.submitCoordenada.emit(coordenadas);
+    if (!this.readOnly) {
+      let coordenadas: ICoordenada = {
+        latitude: event.latlng.lat,
+        longitude: event.latlng.lng,
+      };
+      this.colocarMarcador(coordenadas);
+      this.submitCoordenada.emit(coordenadas);
+    }
   }
 }
