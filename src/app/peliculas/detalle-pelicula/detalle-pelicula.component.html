@@ -11,8 +11,10 @@
         >
       </mat-chip-set>
       <span
-        >{{ releaseDate.toDateString() }} | Promedio: 0.0 | Tu voto: 0.0</span
+        >{{ releaseDate.toDateString() }} | Promedio: {{ movie.scoringAverage }} | Tu
+        voto: </span
       >
+      <app-rating [ratingSeleccionado]="movie.userScoring" (voto)="rate($event)"></app-rating>
     </div>
     <div class="movie-media">
       <div class="movie-poster">

@@ -1,0 +1,26 @@
+<h1>Registrarme</h1>
+
+<form (submit)="signIn()" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Tu nombre</mat-label>
+    <input formControlName="name" type="text" matInput />
+    <mat-error>Ingresa un nombre.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tu correo electr&oacute;nico</mat-label>
+    <input formControlName="email" type="email" matInput />
+    <mat-error>Ingresa un correo electr&oacute;nico valido.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tu contrase&ntilde;a</mat-label>
+    <input formControlName="password" type="password" matInput />
+    <mat-error>Ingrese una contrase&ntilde;a.</mat-error>
+  </mat-form-field>
+
+  <div class="options">
+    <button mat-flat-button color="primary" [disabled]="form.invalid">Registrar</button>
+    <a mat-stroked-button routerLink="/">Ir a inicio</a>
+  </div>
+</form>

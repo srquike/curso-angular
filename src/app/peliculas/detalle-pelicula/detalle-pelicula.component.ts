@@ -4,6 +4,8 @@ import { ActivatedRoute } from '@angular/router';
 import { IPeliculaDetails } from 'src/interfaces/IPelicula';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ILocation } from 'src/interfaces/ICoordenada';
+import { RatingsService } from 'src/app/ratings/ratings.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-detalle-pelicula',
@@ -12,6 +14,7 @@ import { ILocation } from 'src/interfaces/ICoordenada';
 })
 export class DetallePeliculaComponent implements OnInit {
   private service: PeliculasService;
+  private ratingService: RatingsService;
   private activatedRoute: ActivatedRoute;
   private domSanitizer: DomSanitizer;
 
@@ -23,11 +26,13 @@ export class DetallePeliculaComponent implements OnInit {
   public constructor(
     service: PeliculasService,
     activatedRoute: ActivatedRoute,
-    domSanitizer: DomSanitizer
+    domSanitizer: DomSanitizer,
+    ratingService: RatingsService
   ) {
     this.service = service;
     this.activatedRoute = activatedRoute;
     this.domSanitizer = domSanitizer;
+    this.ratingService = ratingService;
   }
 
   ngOnInit(): void {
@@ -62,5 +67,19 @@ export class DetallePeliculaComponent implements OnInit {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(
       'https://www.youtube.com/embed/' + videoId
     );
+  }
+
+  rate(scoring: number): void {
+    this.ratingService.create(this.movie.id, scoring).subscribe({
+      next: async () => {
+        await Swal.fire({
+          title: `Has calificado con ${scoring} a ${this.movie.title}`,
+          showConfirmButton: true,
+          confirmButtonText: 'Genial',
+          icon: 'success',
+        });
+      },
+      error: (errors) => console.log(errors),
+    });
   }
 }

@@ -1,0 +1,15 @@
+form {
+      max-width: 500px;
+}
+
+mat-form-field {
+      width: 100%;
+}
+
+div a {
+      margin-left: 1rem;
+}
+
+.options {
+      margin-top: 1rem;
+}

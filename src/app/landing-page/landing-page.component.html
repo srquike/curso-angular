@@ -1,7 +1,11 @@
-<app-rating [maximoRating]="5"></app-rating>
+<h2>En cines</h2>
+<app-listado-peliculas
+  [movies]="onCinemas"
+  (onDelete)="load()"
+></app-listado-peliculas>
 
-  <h2>En cines</h2>
-  <app-listado-peliculas [movies]="onCinemas" (onDelete)="load()"></app-listado-peliculas>
-
-  <h2>Pr&oacute;ximos extrenos</h2>
-  <app-listado-peliculas [movies]="comingSoon" (onDelete)="load()"></app-listado-peliculas>
+<h2>Pr&oacute;ximos extrenos</h2>
+<app-listado-peliculas
+  [movies]="comingSoon"
+  (onDelete)="load()"
+></app-listado-peliculas>

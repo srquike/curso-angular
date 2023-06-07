@@ -17,22 +17,80 @@ import { BuscarPeliculasComponent } from './peliculas/buscar-peliculas/buscar-pe
 
 import { CreateStarComponent } from './stars/create-star/create-star.component';
 import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-pelicula.component';
+import { IsLoggedIn } from './auth.guard';
+import { LoginComponent } from './users/login/login.component';
+import { SigninComponent } from './users/signin/signin.component';
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'generos', component: ListadoGenerosComponent },
-  { path: 'generos/crear', component: CrearGeneroComponent },
-  { path: 'generos/editar/:id', component: EditarGeneroComponent },
-  { path: 'actores', component: ListadoActoresComponent },
-  { path: 'actores/crear', component: CreateStarComponent },
-  { path: 'actores/editar/:id', component: EditarActorComponent },
-  { path: 'cines', component: ListadoCinesComponent },
-  { path: 'cines/crear', component: CrearCineComponent },
-  { path: 'cines/editar/:id', component: EditarCineComponent },
-  { path: 'peliculas/crear', component: CrearPeliculaComponent },
-  { path: 'peliculas/editar/:id', component: EditarPeliculaComponent },
+  {
+    path: 'generos',
+    component: ListadoGenerosComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'generos/crear',
+    component: CrearGeneroComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'generos/editar/:id',
+    component: EditarGeneroComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'actores',
+    component: ListadoActoresComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'actores/crear',
+    component: CreateStarComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'actores/editar/:id',
+    component: EditarActorComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'cines',
+    component: ListadoCinesComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'cines/crear',
+    component: CrearCineComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'cines/editar/:id',
+    component: EditarCineComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'peliculas/crear',
+    component: CrearPeliculaComponent,
+    canActivate: [IsLoggedIn],
+  },
+  {
+    path: 'peliculas/editar/:id',
+    component: EditarPeliculaComponent,
+    canActivate: [IsLoggedIn],
+  },
   { path: 'peliculas/buscar', component: BuscarPeliculasComponent },
-  { path: 'peliculas/:id', component: DetallePeliculaComponent },
+  {
+    path: 'peliculas/:id',
+    component: DetallePeliculaComponent,
+  },
+  {
+    path: 'users/login',
+    component: LoginComponent,
+  },
+  {
+    path: 'users/signin',
+    component: SigninComponent,
+  },
   { path: '**', redirectTo: '' },
 ];
 

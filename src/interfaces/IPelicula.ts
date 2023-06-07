@@ -19,6 +19,8 @@ export interface IPeliculaDetails {
   trailerUrl: string;
   posterUrl: string;
   mpaaRating: string;
+  userScoring: number;
+  scoringAverage: number;
   genres: IGenero[];
   cinemas: IFormCinema[];
   cast: IActorPelicula[];
@@ -49,5 +51,5 @@ export interface IMovieForEditing {
   noSelectedGenres: IGenero[];
   cinemas: IFormCinema[];
   noSelectedCinemas: IFormCinema[];
-  cast: IActorPelicula[]
+  cast: IActorPelicula[];
 }

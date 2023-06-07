@@ -1,0 +1,20 @@
+<h1>Iniciar sesi&oacute;n</h1>
+
+<form (submit)="logIn()" [formGroup]="form">
+  <mat-form-field appearance="outline">
+    <mat-label>Tu correo electr&oacute;nico</mat-label>
+    <input formControlName="email" type="email" matInput />
+    <mat-error>Ingresa un correo electr&oacute;nico valido.</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Tu contrase&ntilde;a</mat-label>
+    <input formControlName="password" type="password" matInput />
+    <mat-error>Ingrese una contrase&ntilde;a.</mat-error>
+  </mat-form-field>
+
+  <div class="options">
+    <button mat-flat-button color="primary" [disabled]="form.invalid">Entrar</button>
+    <a mat-stroked-button routerLink="/">Ir a inicio</a>
+  </div>
+</form>

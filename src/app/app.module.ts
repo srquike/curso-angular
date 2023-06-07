@@ -7,7 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './material/material.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import { AppComponent } from './app.component';
@@ -41,6 +41,9 @@ import { FormStarComponent } from './stars/form-star/form-star.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { DetallePeliculaComponent } from './peliculas/detalle-pelicula/detalle-pelicula.component';
 import { AuthorizerComponent } from './security/authorizer/authorizer.component';
+import { LoginComponent } from './users/login/login.component';
+import { SigninComponent } from './users/signin/signin.component';
+import { HttpInterceptorService } from './security/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -74,6 +77,8 @@ import { AuthorizerComponent } from './security/authorizer/authorizer.component'
     FormStarComponent,
     DetallePeliculaComponent,
     AuthorizerComponent,
+    LoginComponent,
+    SigninComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,9 +91,17 @@ import { AuthorizerComponent } from './security/authorizer/authorizer.component'
     HttpClientModule,
     SweetAlert2Module,
   ],
-  providers: [{
-    provide: MAT_DATE_LOCALE, useValue: 'es-SV'
-  }],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'es-SV',
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
