@@ -40,6 +40,7 @@ const routes: Routes = [
   {
     path: 'generos/editar/:id',
     component: EditarGeneroComponent,
+    canActivate: [IsLoggedIn],
     title: siteName + 'Editar género'
   },
   {
