@@ -21,75 +21,90 @@ import { IsLoggedIn } from './auth.guard';
 import { LoginComponent } from './users/login/login.component';
 import { SigninComponent } from './users/signin/signin.component';
 
+const siteName = 'Starflix :: '
+
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
   {
     path: 'generos',
     component: ListadoGenerosComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Géneros'
   },
   {
     path: 'generos/crear',
     component: CrearGeneroComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Crear género'
   },
   {
     path: 'generos/editar/:id',
     component: EditarGeneroComponent,
-    canActivate: [IsLoggedIn],
+    title: siteName + 'Editar género'
   },
   {
     path: 'actores',
     component: ListadoActoresComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Estrellas'
   },
   {
     path: 'actores/crear',
     component: CreateStarComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Crear estrella'
   },
   {
     path: 'actores/editar/:id',
     component: EditarActorComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Editar estrella'
   },
   {
     path: 'cines',
     component: ListadoCinesComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Cines'
   },
   {
     path: 'cines/crear',
     component: CrearCineComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Crear cine'
   },
   {
     path: 'cines/editar/:id',
     component: EditarCineComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Editar cine'
   },
   {
     path: 'peliculas/crear',
     component: CrearPeliculaComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Crear película'
   },
   {
     path: 'peliculas/editar/:id',
     component: EditarPeliculaComponent,
     canActivate: [IsLoggedIn],
+    title: siteName + 'Editar película'
   },
-  { path: 'peliculas/buscar', component: BuscarPeliculasComponent },
+  { path: 'peliculas/buscar', component: BuscarPeliculasComponent, title: siteName + 'Buscar películas' },
   {
     path: 'peliculas/:id',
     component: DetallePeliculaComponent,
+    title: siteName + 'Ver película'
   },
   {
     path: 'users/login',
     component: LoginComponent,
+    title: siteName + 'Inicio de sesión'
   },
   {
     path: 'users/signin',
     component: SigninComponent,
+    title: siteName + 'Registrarme'
   },
   { path: '**', redirectTo: '' },
 ];
