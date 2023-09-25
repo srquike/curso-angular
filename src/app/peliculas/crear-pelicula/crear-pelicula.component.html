@@ -1,2 +1,6 @@
 <h2>Crear pel&iacute;cula</h2>
-<app-formulario-pelicula (_onSubmit)="crearPelicula($event)"></app-formulario-pelicula>
+<app-formulario-pelicula 
+(_onSubmit)="crearPelicula($event)"
+[_generosNoSeleccionados]="noSelectedGenres"
+[_cinesNoSeleccionados]="noSelectedCinemas"
+></app-formulario-pelicula>
