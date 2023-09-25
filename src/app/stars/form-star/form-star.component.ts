@@ -20,7 +20,7 @@ export class FormStarComponent implements OnInit {
     this._form = new FormGroup({
       name: new FormControl('', Validators.required),
       dateOfBirth: new FormControl('', Validators.required),
-      photography: new FormControl(''),
+      photographyFile: new FormControl(''),
     });
     this._onEmit = new EventEmitter<IFormActor>();
   }
@@ -37,6 +37,6 @@ export class FormStarComponent implements OnInit {
   }
 
   setImageFile(imageFile: File): void {
-    this._form.get('photography').setValue(imageFile);
+    this._form.get('photographyFile').setValue(imageFile);
   }
 }

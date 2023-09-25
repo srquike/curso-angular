@@ -2,7 +2,7 @@ export interface IFormActor {
   id: number;
   name: string;
   dateOfBirth: Date | string;
-  photographyUrl: File | string;
+  photographyFile: File | string;
 }
 
 export interface ISearchActor {

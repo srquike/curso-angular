@@ -41,7 +41,7 @@ export class ActoresService {
     const formData = new FormData();
     formData.append('name', star.name);
     formData.append('dateOfBirth', (star.dateOfBirth as Date).toISOString());
-    formData.append('photographyFile', star.photographyUrl);
+    formData.append('photographyFile', star.photographyFile);
 
     return formData;
   }

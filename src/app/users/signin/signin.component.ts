@@ -32,12 +32,12 @@ export class SigninComponent {
   }
 
   signIn() {
-    this.service.signIn(<ISigninUser>this.form.value).subscribe({
-      next: (response) => {
-        this.service.saveToken(response);
-        this.router.navigate(['/']);
-      },
-      error: (errors) => console.log(errors),
-    });
+    // this.service.signIn(<ISigninUser>this.form.value).subscribe({
+    //   next: (response) => {
+    //     this.service.saveToken(response);
+    //     this.router.navigate(['/']);
+    //   },
+    //   error: (errors) => console.log(errors),
+    // });
   }
 }
