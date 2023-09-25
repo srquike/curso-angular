@@ -35,7 +35,7 @@ export class UsersService {
   }
 
   public getRoles(): string {
-    return '';
+    return this.getClaimFromJwt('role');
   }
 
   public getClaimFromJwt(claim: string): string {
